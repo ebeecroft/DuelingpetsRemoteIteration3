@@ -1,0 +1,118 @@
+== Duelingpets Home of the Imaginative Creatures
+
+A website that allows users to create their own creatures.
+
+== Current Features:
+
+Baseincs is used to simplify the dragonhoard feature and
+does this by providing a base increment in units of tens
+that can be used with the new fieldcosts feature.
+Fieldcosts is used to flucate the economy itself by
+increasing/decreasing the costs of the sinks and sources
+of the website.
+Baserates is used to simplify the dragonhoard feature and
+does this by providing a base ratio as a double that can
+be used with the new ratecosts feature.
+Dreyores is used to keep track of the amount of dreyores
+that are available to starting users as well as those
+that the monster can pull from.
+
+Referrals allows users to gain points whenever they get
+referred by someone.
+Bookworlds allows users to setup the story environment
+that they wish to use or to allow them to create their
+own.
+Books allows users to build on the world they had chosen
+and potentially allow other users the ability to contribute
+to the project.
+Gchapters are generic chapters that are used to keep tabs
+of the progress of a particular story.
+Chapters allows users to build out a story involving a
+variety of characters and even include a bookcover, possible
+artwork and music for the characters themselves.
+
+Donationboxes allows users the ability to keep track of the
+amount of points that other users to donated to them as they
+try to reach their points goal. In addition to this they can
+refund the points back to the users if it doesn't work and
+can only use the points when they have collected them.
+Donors allows users the ability to donate to each others box
+so that points can be passed around. These points can then
+be used for commissions as well as paying for pets and items.
+
+Channels allows users to store videos as well as to set the
+type of users who can view the videos themselves.
+Mainplaylists provides a way for users to organize videos
+into folders to give structure to them.
+Subplaylists allows users to subdivide these folders
+further to provide an increased flexibility in the design.
+Also the user can allow others to submit movies to the
+subfolder.
+Movies allows users to upload different video formats to
+the website as well as setting the type of users who can
+see the video.
+
+Pouchtypes is used to simplify the pouch feature by moving
+upgradable features to this table instead.
+Pouchslots adds expandability to the pouch itself without
+having to store the free and member upgrades directly to
+the pouch. This allows the pouchslots to scale at will
+as the database grows.
+
+== Changes:
+Simplified the dragonhoard by moving some of the data to
+new tables.
+
+Simplfied the userupgrades by revising the table itself
+to be more versetal.
+
+Moved the pouch levels for various features to the new
+tables pouchslot and pouchtype.
+
+== Iteration 1 Features:
+
+Registrations allows new users to signup to the website.
+Accountypes determines if this account is used for storing points
+or is an actual play account.
+Users allows them to edit their profile and view content.
+Colorschemes allows the user to control the color of the website.
+Pouches allows the user to store their emeralds and points inside
+a small expandable bag.
+Bookgroups determines the type of content the user can view.
+Dragonhoard the central bank that manages the pricing of features.
+Economies keeps track of the points flowing in and out of the system.
+Userinfos allows users to change their background music and their
+avatar.
+
+Blacklistednames is used to keep track of the bots that were attempting
+to get into the site.
+Blacklisteddomains is used to keep track of the domains the bots
+attempted to use to access the site.
+Suspendedtimelimits keeps track of the users who have been banned for a
+certain amount of time.
+Artpages shows the avatars for individual pages such as login, and
+registration.
+
+Userupgrades allows the user to upgrade their content.
+Gameinfos allows the player to set the mode they wish.
+Difficulty determines how difficult the game should be.
+Blogs allows the player to create news articles.
+Blogtypes determines whether it is an ad or a blog.
+Blogviewers who can view this particular blog.
+
+OCs allows players to create original characters.
+Shoutbox allows players to store shout messages.
+Shouts allows players to communicate with each other.
+Inventories allows the player to hold items.
+Items can boost a pets ability or give certain affects.
+Itemtypes determines what type of item it is.
+
+Creatures allows the player to create their very own pet.
+Creaturetypes allows the player to choose between pet or Zethian.
+PMboxes stores private messages between players.
+PMs allows players to communicate privately between each other.
+PMreplies allows players to respond to a pm.
+Jukeboxes allows the player to store sounds.
+Mainsheets allows the player to seperate sounds.
+Subsheets allows the player to create more specific sound specifications.
+Sounds allows the player to create different audio tracks.
