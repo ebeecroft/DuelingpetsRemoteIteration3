@@ -1,0 +1,128 @@
+<% provide(:h1, "Dragonhoard List") %>
+<% if current_user %>
+   <p class="centerpagecontent"><%= playMusicLoop("Hoard", nil) %></p>
+   <div class="pageformat">
+      <% if current_user.userinfo.mute_on %>
+         <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "Hoard"), method: :post, class: "button submitbutton" %></p>
+      <% else %>
+         <p><%= button_to 'Mute music', muteAudio_path(:pageType => "Hoard"), method: :post, class: "button submitbutton" %></p>
+      <% end %>
+   </div>
+<% end %>
+   <div class="pageformat">
+      <div class="container"><p>Name: <%= @dragonhoard.name %></p></div>
+      <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+         <div class="container"><%= button_to 'Edit', edit_dragonhoard_path(@dragonhoard), method: :get, class: "button editbutton" %></div>
+      <% end %>
+      <p>Created: <%= distance_of_time_in_words_to_now @dragonhoard.created_on %> ago on (<%= @dragonhoard.created_on.strftime("%B-%d-%Y") %>)</p>
+      <p>Updated: <%= distance_of_time_in_words_to_now @dragonhoard.updated_on %> ago on (<%= @dragonhoard.updated_on.strftime("%B-%d-%Y") %>)</p>
+      <% if @dragonhoard.dragonimage.to_s != "" %>
+         <p><%= image_tag(@dragonhoard.dragonimage_url(:thumb)) %></p>
+         <br>
+      <% end %>
+      <p class="textindent"><%= textFormater("Multi", @dragonhoard.message, "All").html_safe %></p>
+      <% if @dragonhoard.denholiday %>
+         <br>
+         <p>Glitchy the dragon is on holiday and all sources of points have been disabled!</p>
+      <% end %>
+      <br>
+      <p>Base cost: <%= @dragonhoard.basecost %></p>
+      <p>Base rate: <%= @dragonhoard.baserate %></p>
+      <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+         <div class="container">Contest points: <%= @dragonhoard.contestpoints %></div>
+         <% if !@dragonhoard.denholiday %>
+            <div class="container"><%= button_to "Transfer points to Glitchy!", dragonhoards_transfer_path, method: :post, class: "button submitbutton" %></div>
+            <br>
+         <% end %>
+      <% else %>
+         <p>Contest points: <%= @dragonhoard.contestpoints %></p>
+      <% end %>
+      <% if current_user %>
+         <div class="container">Emeralds: <%= @dragonhoard.emeralds %></div>
+         <div class="container"><%= button_to "Buy Emeralds for " + getEmeraldPrice("Buy").to_s, dragonhoards_buyemeralds_path(:dragonhoard_id=>@dragonhoard.id), method: :post, class: "button submitbutton" %></div>
+         <br>
+      <% else %>
+         <p>Emeralds: <%= @dragonhoard.emeralds %></p>
+      <% end %>
+      <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+         <div class="container">Profit: <%= @dragonhoard.profit %></div>
+         <div class="container"><%= button_to 'Withdraw points', dragonhoards_withdraw_path(:dragonhoard_id=>@dragonhoard.id), method: :post, class: "button submitbutton" %></div>
+         <br>
+         <div class="container">Donated points: <%= @dragonhoard.vacationpoints %></div>
+         <% if current_user %>
+            <div class="container"><%#= button_to "Donate!", dragonhoards_donatepoints_path, method: :get, class: "button submitbutton" %></div>
+         <% end %>
+         <% if !@dragonhoard.denholiday %>
+            <div class="container"><%= button_to "Retrieve points!", dragonhoards_getvacationpoints_path, method: :post, class: "button submitbutton" %></div>
+            <br>
+         <% end %>
+         <div class="container">On vacation: <%= @dragonhoard.denholiday %></div>
+         <% if !@dragonhoard.denholiday %>
+            <div class="container"><%= button_to "Go on vacation!", dragonhoards_vacationmode_path, method: :post, class: "button submitbutton" %></div>
+         <% else %>
+            <div class="container"><%= button_to "Return from vacation!", dragonhoards_vacationmode_path, method: :post, class: "button submitbutton" %></div>
+         <% end %>
+         <br>
+         <div class="container"><p>Treasury: <%= @dragonhoard.treasury %></p></div>
+         <div class="container"><%= button_to 'Convert points', dragonhoards_convertpoints_path, method: :post, class: "button submitbutton" %></div>
+         <br>
+      <% else %>
+         <p>Profit: <%= @dragonhoard.profit %></p>
+         <p>Donation points: <%= @dragonhoard.vacationpoints %></p>
+         <p>On vacation: <%= @dragonhoard.denholiday %></p>
+         <p>Treasury: <%= @dragonhoard.treasury %></p>
+      <% end %>
+      <br>
+      <p>Fieldcosts</p>
+      <% if @fieldcosts.count >= 9 %>
+         <div class="formlinks"><%= paginate @fieldcosts %></div>
+         <br>
+      <% end %>
+      <% @fieldcosts.each do |fieldcost| %>
+         <p>Name: <%= fieldcost.name %></p>
+         <p>Amount: <%= fieldcost.amount %></p>
+         <p>Econtype: <%= fieldcost.econtype %></p>
+         <p>Baseinc: <%= fieldcost.baseinc.name %></p>
+         <br>
+         <p>Created: <%= distance_of_time_in_words_to_now fieldcost.created_on %> ago on (<%= fieldcost.created_on.strftime("%B-%d-%Y") %>)</p>
+         <p>Updated: <%= distance_of_time_in_words_to_now fieldcost.updated_on %> ago on (<%= fieldcost.updated_on.strftime("%B-%d-%Y") %>)</p>
+         <br>
+      <% end %>
+      <p>Ratecosts</p>
+      <% if @ratecosts.count >= 9 %>
+         <div class="formlinks"><%= paginate @ratecosts %></div>
+         <br>
+      <% end %>
+      <% @ratecosts.each do |ratecost| %>
+         <p>Name: <%= ratecost.name %></p>
+         <p>Amount: <%= ratecost.amount %></p>
+         <p>Econtype: <%= ratecost.econtype %></p>
+         <p>Baserate: <%= ratecost.baserate.name %></p>
+         <br>
+         <p>Created: <%= distance_of_time_in_words_to_now ratecost.created_on %> ago on (<%= ratecost.created_on.strftime("%B-%d-%Y") %>)</p>
+         <p>Updated: <%= distance_of_time_in_words_to_now ratecost.updated_on %> ago on (<%= ratecost.updated_on.strftime("%B-%d-%Y") %>)</p>
+         <br>
+      <% end %>
+      <p>Dreyterrium</p>
+      <% @dreyores.each do |dreyore| %>
+         <p>Name: <%= dreyore.name %></p>
+         <p>Dreyterrium: <%= dreyore.cur %>/<%= dreyore.cap %></p>
+         <p>Change: <%= dreyore.change %></p>
+         <p>Baseinc: <%= dreyore.baseinc %></p>
+         <p>Extracted: <%= dreyore.extracted %></p>
+         <p>Price: <%= dreyore.price %></p>
+         <br>
+         <p>Created: <%= distance_of_time_in_words_to_now dreyore.created_on %> ago on (<%= dreyore.created_on.strftime("%B-%d-%Y") %>)</p>
+         <p>Updated: <%= distance_of_time_in_words_to_now dreyore.updated_on %> ago on (<%= dreyore.updated_on.strftime("%B-%d-%Y") %>)</p>
+         <br>
+      <% end %>
+   </div>
+   <% if(current_user && current_user.pouch.privilege == "Glitchy") %>
+      <div class="pageformat">
+         <p><%= button_to "New Fieldcost", new_dragonhoard_fieldcost_path(@dragonhoard), method: :get, class: "button submitbutton" %></p>
+         <p><%= button_to "New Ratecost", new_dragonhoard_ratecost_path(@dragonhoard), method: :get, class: "button submitbutton" %></p>
+         <p><%= button_to "Create Emeralds for " + getEmeraldPrice("Create").to_s, dragonhoards_createemeralds_path(:dragonhoard_id => @dragonhoard.id), method: :post, class: "button submitbutton" %></p>
+         <br>
+      </div>
+   <% end %>
+<p class="formlinks"><%= link_to 'Back', root_path %></p>

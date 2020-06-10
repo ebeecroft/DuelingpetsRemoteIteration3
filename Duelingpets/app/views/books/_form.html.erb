@@ -1,0 +1,35 @@
+<%= form_with(model: [@bookworld, @book], local: true) do |form| %>
+  <% if @book.errors.any? %>
+    <div id="errorexplan">
+      <h2 id="errorheader"><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="pageformat">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="pageformat">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div class="pageformat">
+    <%= form.label :bookgroup_id, "Select Group" %>
+    <%= form.collection_select(:bookgroup_id, @group, :id, :name) %>
+  </div>
+  <div class="pageformat">
+    <%= form.label :collab_mode %>
+    <%= form.check_box :collab_mode %>
+  </div>
+  <br>
+  <div class="pageformat">
+    <%= form.submit class: "button submitbutton" %>
+  </div>
+  <br>
+  <p class="formlinks"><%= link_to 'Back', user_bookworld_path(@bookworld.user, @bookworld) %></p>
+<% end %>

@@ -1,0 +1,35 @@
+<%= form_with(model: [@dragonhoard, @dreyore], local: true) do |form| %>
+  <% if @dreyore.errors.any? %>
+    <div id="errorexplan">
+      <h2 id="errorheader"><%= pluralize(@dreyore.errors.count, "error") %> prohibited this dreyore from being saved:</h2>
+
+      <ul>
+      <% @dreyore.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="pageformat">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="pageformat">
+    <%= form.label :change %>
+    <%= form.number_field :change %>
+  </div>
+  <div class="pageformat">
+    <%= form.label :cap %>
+    <%= form.number_field :cap %>
+  </div>
+  <div class="pageformat">
+    <%= form.label :baseinc %>
+    <%= form.number_field :baseinc %>
+  </div>
+  <br>
+  <div class="pageformat">
+    <%= form.submit class: "button submitbutton" %>
+  </div>
+  <br>
+  <p class="formlinks"><%= link_to 'Back', dreyores_path %></p>
+<% end %>
