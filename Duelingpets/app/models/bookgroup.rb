@@ -7,4 +7,8 @@ class Bookgroup < ApplicationRecord
    has_many :sounds, :foreign_key => "bookgroup_id", :dependent => :destroy
    has_many :books, :foreign_key => "bookgroup_id", :dependent => :destroy
    has_many :chapters, :foreign_key => "bookgroup_id", :dependent => :destroy
+   has_many :galleries, :foreign_key => "bookgroup_id", :dependent => :destroy
+   has_many :arts, :foreign_key => "bookgroup_id", :dependent => :destroy
+   has_many :channels, :foreign_key => "bookgroup_id", :dependent => :destroy
+   has_many :movies, :foreign_key => "bookgroup_id", :dependent => :destroy
 end

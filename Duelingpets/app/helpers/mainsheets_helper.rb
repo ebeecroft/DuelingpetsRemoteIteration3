@@ -130,8 +130,8 @@ module MainsheetsHelper
 
                         if(type == "create")
                            mainsheetcost = Fieldcost.find_by_name("Mainsheet")
-                           if(logged_in.pouch.amount - mainsheet.amount >= 0)
-                              logged_in.pouch.amount -= mainsheet.amount
+                           if(logged_in.pouch.amount - mainsheetcost.amount >= 0)
+                              logged_in.pouch.amount -= mainsheetcost.amount
                               @pouch = logged_in.pouch
                               @pouch.save
                               if(@mainsheet.save)

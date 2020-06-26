@@ -19,7 +19,7 @@
       <% if sound.user.userinfo.miniavatar.to_s != "" %>
          <p><%= image_tag(sound.user.userinfo.miniavatar_url(:thumb)) %></p>
       <% end %>
-      <p class="formlinks">Owner: <%= getUserPrivilege(sound.user) %><%= link_to sound.user.vname, user_path(sound.user) %></p>
+      <p class="formlinks">Composer: <%= getUserPrivilege(sound.user) %><%= link_to sound.user.vname, user_path(sound.user) %></p>
       <p class="formlinks">Subsheet: <%= link_to sound.subsheet.title, mainsheet_subsheet_path(sound.subsheet.mainsheet, sound.subsheet) %></p>
       <p>Group: <%= sound.bookgroup.name %></p>
       <p>Points received: <%= sound.pointsreceived %></p>

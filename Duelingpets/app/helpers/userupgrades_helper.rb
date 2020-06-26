@@ -26,6 +26,12 @@ module UserupgradesHelper
                pouch.pouchslot.free1 += 1
                level = pouch.pouchslot.free1
             end
+         elsif(buytype == "Gallery")
+            level = pouch.pouchslot.free9
+            if(upgradetype == "Purchase")
+               pouch.pouchslot.free9 += 1
+               level = pouch.pouchslot.free9
+            end
          elsif(buytype == "Channel")
             level = pouch.pouchslot.free8
             if(upgradetype == "Purchase")

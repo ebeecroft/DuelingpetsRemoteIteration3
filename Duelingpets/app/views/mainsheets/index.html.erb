@@ -12,7 +12,7 @@
       <% if mainsheet.user.userinfo.miniavatar.to_s != "" %>
          <p><%= image_tag(mainsheet.user.userinfo.miniavatar_url(:thumb)) %></p>
       <% end %>
-      <p class="formlinks">Owner: <%= getUserPrivilege(mainsheet.user) %><%= link_to mainsheet.user.vname, user_path(mainsheet.user) %></p>
+      <p class="formlinks">Composer: <%= getUserPrivilege(mainsheet.user) %><%= link_to mainsheet.user.vname, user_path(mainsheet.user) %></p>
       <p class="formlinks">Jukebox: <%= link_to mainsheet.jukebox.name, user_jukebox_path(mainsheet.user, mainsheet.jukebox) %></p>
       <p>Status: <%= getActivity(mainsheet.user) %>
          <% if getActivity(mainsheet.user) != "Online" && getActivity(mainsheet.user) != "Inoperable" %>

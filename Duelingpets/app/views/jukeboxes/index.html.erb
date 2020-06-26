@@ -17,7 +17,7 @@
          <% if jukebox.user.userinfo.miniavatar.to_s != "" %>
             <p><%= image_tag(jukebox.user.userinfo.miniavatar_url(:thumb)) %></p>
          <% end %>
-         <p class="formlinks">Owner: <%= getUserPrivilege(jukebox.user) %><%= link_to jukebox.user.vname, user_path(jukebox.user) %></p>
+         <p class="formlinks">Composer: <%= getUserPrivilege(jukebox.user) %><%= link_to jukebox.user.vname, user_path(jukebox.user) %></p>
          <p>Group: <%= jukebox.bookgroup.name %></p>
          <p>Status: <%= getActivity(jukebox.user) %>
             <% if getActivity(jukebox.user) != "Online" && getActivity(jukebox.user) != "Inoperable" %>

@@ -146,7 +146,11 @@
       <br>
       <div class="container">Free channel level: <%= @user.pouch.pouchslot.free8 %>/<%= getUpgrades("Channel", "Max", @user.pouch, 8) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Channel", "Cost", @user.pouch, 8).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Channel", :upnumber=>8), method: :post, class: "button submitbutton" %></div>
       <br>
-      <div class="container">Member channel level: <%= @user.pouch.pouchslot.free8 %>/<%= getUpgrades("Channel", "Max", @user.pouch, 8) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Channel", "Cost", @user.pouch, 8).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Book", :upnumber=>8), method: :post, class: "button submitbutton" %></div>
+      <div class="container">Member channel level: <%= @user.pouch.pouchslot.free8 %>/<%= getUpgrades("Channel", "Max", @user.pouch, 8) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Channel", "Cost", @user.pouch, 8).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Channel", :upnumber=>8), method: :post, class: "button submitbutton" %></div>
+      <br>
+      <div class="container">Free gallery level: <%= @user.pouch.pouchslot.free9 %>/<%= getUpgrades("Gallery", "Max", @user.pouch, 9) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Gallery", "Cost", @user.pouch, 9).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Gallery", :upnumber=>9), method: :post, class: "button submitbutton" %></div>
+      <br>
+      <div class="container">Member gallery level: <%= @user.pouch.pouchslot.free9 %>/<%= getUpgrades("Gallery", "Max", @user.pouch, 9) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Gallery", "Cost", @user.pouch, 9).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Gallery", :upnumber=>9), method: :post, class: "button submitbutton" %></div>
       <br>
    <% end %>
    <%= render 'showform' %>

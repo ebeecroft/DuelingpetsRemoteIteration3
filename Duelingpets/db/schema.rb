@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_035902) do
+ActiveRecord::Schema.define(version: 2020_06_13_152621) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,24 @@ ActiveRecord::Schema.define(version: 2020_05_20_035902) do
     t.text "message"
     t.datetime "created_on"
     t.string "art"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "arts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "image"
+    t.string "ogg"
+    t.string "mp3"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.datetime "reviewed_on"
+    t.integer "user_id"
+    t.integer "bookgroup_id"
+    t.integer "subfolder_id"
+    t.boolean "reviewed", default: false
+    t.boolean "pointsreceived", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -373,6 +391,21 @@ ActiveRecord::Schema.define(version: 2020_05_20_035902) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "galleries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "ogg"
+    t.string "mp3"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.integer "user_id"
+    t.integer "bookgroup_id"
+    t.boolean "music_on", default: false
+    t.boolean "privategallery", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "gameinfos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "difficulty_id"
     t.boolean "lives_enabled", default: false
@@ -456,6 +489,17 @@ ActiveRecord::Schema.define(version: 2020_05_20_035902) do
     t.integer "bookgroup_id"
     t.boolean "music_on", default: false
     t.boolean "privatejukebox", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mainfolders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.integer "user_id"
+    t.integer "gallery_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -818,6 +862,20 @@ ActiveRecord::Schema.define(version: 2020_05_20_035902) do
     t.integer "subsheet_id"
     t.boolean "reviewed", default: false
     t.boolean "pointsreceived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subfolders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.integer "user_id"
+    t.integer "mainfolder_id"
+    t.boolean "collab_mode", default: false
+    t.boolean "fave_folder", default: false
+    t.boolean "privatesubfolder", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

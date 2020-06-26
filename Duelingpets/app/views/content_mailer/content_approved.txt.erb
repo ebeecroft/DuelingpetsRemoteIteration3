@@ -12,6 +12,8 @@
    Your new chapter <%= @content.title %> was approved!
 <% elsif @type == "Movie" %>
    Your new movie <%= @content.title %> was approved!
+<% elsif @type == "Art" %>
+   Your new art <%= @content.title %> was approved!
 <% end %>
 ===============================================
 
@@ -54,6 +56,11 @@ that it fits into the correct book group. The
 <% elsif @type == "Movie" %>
    movie you have created is really nice. The other
    users will have a lot of fun watching your video.
+<% elsif @type == "Art" %>
+   art you have created is really nice. I am sure
+   that the others will enjoy looking at your
+   beautiful artwork too. The sounds if any seem to
+   set the scene quite well.
 <% end %>
 In recognition of your effort we have decided
 to add these <%= @points %> points to your account.

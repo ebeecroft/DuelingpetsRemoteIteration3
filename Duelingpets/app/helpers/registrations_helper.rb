@@ -161,6 +161,7 @@ module RegistrationsHelper
          newPouchslot.pouchtype6_id = 7
          newPouchslot.pouchtype7_id = 8
          newPouchslot.pouchtype8_id = 9
+         newPouchslot.pouchtype9_id = 10
          @pouchslot = newPouchslot
          @pouchslot.save
       end

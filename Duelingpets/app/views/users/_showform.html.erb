@@ -60,6 +60,24 @@
       <p><%= button_to "Inventory", user_inventory_path(@user, @user.inventory), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
+<!--Gallery section--->
+<% if getUserContent(@user, "Galleries") != 0 %>
+   <br>
+   <p>Gallery section</p>
+   <div class="container"><%= button_to "My Galleries", user_galleries_path(@user), method: :get, class: "button submitbutton" %></div>
+   <% if current_user && current_user.id == @user.id && getUpgrades("Gallery", "Limit", @user.pouch, 9) > 0 %>
+      <div class="container"><%= button_to "New Gallery", new_user_gallery_path(@user), method: :get, class: "button submitbutton" %></div>
+   <% end %>
+   <br>
+   <p>Gallery limit: <%= @user.galleries.count %>/<%= getUpgrades("Gallery", "Limit", @user.pouch, 9) %></p>
+<% else %>
+   <% if current_user && current_user.id == @user.id && getUpgrades("Gallery", "Limit", @user.pouch, 9) > 0 %>
+      <br>
+      <p>Gallery section</p>
+      <p><%= button_to "New Gallery", new_user_gallery_path(@user), method: :get, class: "button submitbutton" %></p>
+   <% end %>
+<% end %>
+<!--Gallery section end--->
 <!--Channel section--->
 <% if getUserContent(@user, "Channels") != 0 %>
    <br>

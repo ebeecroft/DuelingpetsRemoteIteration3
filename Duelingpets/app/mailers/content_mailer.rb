@@ -45,6 +45,9 @@ class ContentMailer < ApplicationMailer
       elsif(type == "Movie")
          email = content.user.email
          message = "Your movie #{content.title} was approved:[Duelingpets]"
+      elsif(type == "Art")
+         email = content.user.email
+         message = "Your art #{content.title} was approved:[Duelingpets]"
       end
       @type = type
       @content = content
@@ -77,6 +80,9 @@ class ContentMailer < ApplicationMailer
       elsif(type == "Movie")
          email = content.user.email
          message = "Your movie #{content.title} was denied:[Duelingpets]"
+      elsif(type == "Art")
+         email = content.user.email
+         message = "Your art #{content.title} was denied:[Duelingpets]"
       end
       @type = type
       @content = content
@@ -99,6 +105,8 @@ class ContentMailer < ApplicationMailer
          message = "New chapter #{content.title} is awaiting review:[Duelingpets]"
       elsif(type == "Movie")
          message = "New movie #{content.title} is awaiting review:[Duelingpets]"
+      elsif(type == "Art")
+         message = "New art #{content.title} is awaiting review:[Duelingpets]"
       end
       @type = type
       @content = content

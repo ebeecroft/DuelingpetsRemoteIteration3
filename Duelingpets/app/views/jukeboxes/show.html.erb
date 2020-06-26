@@ -35,7 +35,7 @@
    <% if @jukebox.user.userinfo.miniavatar.to_s != "" %>
       <p><%= image_tag(@jukebox.user.userinfo.miniavatar_url(:thumb)) %></p>
    <% end %>
-   <p class="formlinks">Owner: <%= getUserPrivilege(@jukebox.user) %><%= link_to @jukebox.user.vname, user_path(@jukebox.user) %></p>
+   <p class="formlinks">Composer: <%= getUserPrivilege(@jukebox.user) %><%= link_to @jukebox.user.vname, user_path(@jukebox.user) %></p>
    <p>Group: <%= @jukebox.bookgroup.name %></p>
    <p>Total mainsheets: <%= @jukebox.mainsheets.count %></p>
    <p>Status: <%= getActivity(@jukebox.user) %>
@@ -65,7 +65,7 @@
       <% if mainsheet.user.userinfo.miniavatar.to_s != "" %>
          <p><%= image_tag(mainsheet.user.userinfo.miniavatar_url(:thumb)) %></p>
       <% end %>
-      <p class="formlinks">Owner: <%= getUserPrivilege(mainsheet.user) %><%= link_to mainsheet.user.vname, user_path(mainsheet.user) %></p>
+      <p class="formlinks">Composer: <%= getUserPrivilege(mainsheet.user) %><%= link_to mainsheet.user.vname, user_path(mainsheet.user) %></p>
       <p>Total subsheets: <%= mainsheet.subsheets.count %></p>
       <p>Status: <%= getActivity(mainsheet.user) %>
          <% if getActivity(mainsheet.user) != "Online" && getActivity(mainsheet.user) != "Inoperable" %>

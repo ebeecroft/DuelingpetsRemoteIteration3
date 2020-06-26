@@ -62,6 +62,9 @@ module UsersHelper
             allDonors = Donor.order("created_on desc")
             donors = allDonors.select{|donor| donor.donationbox_id == user.donationbox.id && !donor.pointsreceived}
             value = donors.sum{|donor| donor.amount}
+         elsif(type == "Galleries")
+            allGalleries = user.galleries.order("created_on desc")
+            value = allGalleries.count
          elsif(type == "Channels")
             allChannels = user.channels.order("created_on desc")
             value = allChannels.count
@@ -376,10 +379,14 @@ module UsersHelper
                   redirect_to jukeboxes_path
                elsif(params[:pageType] == "Channelmain")
                   redirect_to channels_path
+               elsif(params[:pageType] == "Gallerymain")
+                  redirect_to galleries_path
                elsif(params[:pageType] == "Jukebox")
                   redirect_to user_jukeboxes_path(current_user)
                elsif(params[:pageType] == "Channel")
                   redirect_to user_channels_path(current_user)
+               elsif(params[:pageType] == "Gallery")
+                  redirect_to user_galleries_path(current_user)
                end
             end
          end

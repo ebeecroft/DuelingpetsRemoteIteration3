@@ -18,6 +18,8 @@
          <h1>Your new chapter <%= @content.title %> was denied!</h1>
       <% elsif @type == "Movie" %>
          <h1>Your new movie <%= @content.title %> was denied!</h1>
+      <% elsif @type == "Art" %>
+         <h1>Your new art <%= @content.title %> was denied!</h1>
       <% end %>
       <p>
          Our review team has taken the time to do look over
@@ -67,6 +69,14 @@
             was set to the wrong type for this type of video.
             The content may need to be changed just a tad
             before it can be approved.
+         <% elsif @type == "Art" %>
+            The image of this artwork may not be suitable for
+            our community. It is also possible that the
+            bookgroup was set to the wrong type for this type
+            of art. The sound that is included may not be
+            appropriate for the audience it is targeting. The
+            content may need to be changed just a tad before
+            it can be approved.
          <% end %>
          Our review team will get in touch with you to go
          over the specifics. Do not worry these things
