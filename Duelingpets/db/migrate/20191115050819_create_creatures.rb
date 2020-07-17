@@ -4,30 +4,31 @@ class CreateCreatures < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.string :image
+      t.string :activepet
       t.string :ogg
       t.string :mp3
       t.string :voiceogg
       t.string :voicemp3
-      t.integer :level
-      t.integer :hp
-      t.integer :atk
-      t.integer :def
-      t.integer :agility
-      t.integer :strength
-      t.integer :mp
-      t.integer :matk
-      t.integer :mdef
-      t.integer :magi
-      t.integer :mstr
-      t.integer :hunger
-      t.integer :thirst
-      t.integer :fun
-      t.integer :lives
-      t.integer :rarity
+      t.integer :level, default: 0
+      t.integer :hp, default: 0
+      t.integer :atk, default: 0
+      t.integer :def, default: 0
+      t.integer :agility, default: 0
+      t.integer :strength, default: 0
+      t.integer :mp, default: 0
+      t.integer :matk, default: 0
+      t.integer :mdef, default: 0
+      t.integer :magi, default: 0
+      t.integer :mstr, default: 0
+      t.integer :hunger, default: 0
+      t.integer :thirst, default: 0
+      t.integer :fun, default: 0
+      t.integer :lives, default: 0
+      t.integer :rarity, default: 1
       t.boolean :unlimitedlives, default: false
       t.boolean :retiredpet, default: false
       t.boolean :starter, default: false
-      t.integer :emeraldcost
+      t.integer :emeraldcost, default: 0
       t.integer :cost
       t.datetime :created_on
       t.datetime :updated_on

@@ -123,6 +123,18 @@
      <%= form.text_field :remote_image_url %>
      <%= form.hidden_field :image_cache %>
   </div>
+  <p class="pageformat">Activepet image</p>
+  <div class="pageformat">
+     <%= image_tag @creature.activepet_url(:thumb).to_s if @creature.activepet? %>
+  </div>
+  <div class="pageformat">
+     <%= form.file_field :activepet %>
+  </div>
+  <div class="pageformat">
+     <%= form.label :remote_activepet_url, "or Activepet URL" %>
+     <%= form.text_field :remote_activepet_url %>
+     <%= form.hidden_field :activepet_cache %>
+  </div>
   <p class="pageformat">Voiceogg files</p>
   <div class="pageformat">
      <%= audio_tag(@creature.voiceogg_url.to_s, :controls => true) if @creature.voiceogg? %>

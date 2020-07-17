@@ -5,6 +5,7 @@ class Creature < ApplicationRecord
 
    #Uploader section
    mount_uploader :image, ImageUploader
+   mount_uploader :activepet, ActivepetUploader
    mount_uploader :ogg, OggUploader
    mount_uploader :mp3, Mp3Uploader
    mount_uploader :voiceogg, VoiceoggUploader

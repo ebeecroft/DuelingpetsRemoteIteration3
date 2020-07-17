@@ -73,7 +73,8 @@ module CreaturesHelper
             :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity,
             :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url,
             :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg,
-            :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id)
+            :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id,
+            :activepet, :remote_activepet_url, :activepet_cache)
          elsif(type == "Page")
             value = params[:page]
          else

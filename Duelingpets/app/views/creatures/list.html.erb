@@ -14,6 +14,11 @@
          <br>
          <p><%= image_tag(creature.image_url(:thumb)) %></p>
       <% end %>
+      <% if creature.activepet.to_s != "" %>
+         <br>
+         <p>Activepet image</p>
+         <p><%= image_tag(creature.activepet_url(:thumb)) %></p>
+      <% end %>
       <% if creature.ogg.to_s != "" || creature.mp3.to_s != "" %>
          <br>
          <p>Theme song: <%= audio_tag(getMusicOrVideo("Sound", creature), :controls => true) %></p>
