@@ -60,6 +60,15 @@
       <p><%= button_to "Inventory", user_inventory_path(@user, @user.inventory), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
+<!--Partner section--->
+<% if getUserContent(@user, "Partners") != 0 %>
+   <br>
+   <p>Partner section</p>
+   <div class="container"><%= button_to "My Partners", user_partners_path(@user), method: :get, class: "button submitbutton" %></div>
+   <br>
+   <p>Partner limit: <%= @user.partners.count %>/<%= getUpgrades("Partner", "Limit", @user.pouch, 10) %></p>
+<% end %>
+<!--Partner section end--->
 <!--Gallery section--->
 <% if getUserContent(@user, "Galleries") != 0 %>
    <br>

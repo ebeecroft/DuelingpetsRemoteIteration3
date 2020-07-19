@@ -1,6 +1,30 @@
 module CreaturesHelper
 
    private
+      def getCreatureParams(type)
+         value = ""
+         if(type == "Id")
+            value = params[:id]
+         elsif(type == "CreatureId")
+            value = params[:creature_id]
+         elsif(type == "User")
+            value = params[:user_id]
+         elsif(type == "Creature")
+            #Add Knowledge here later
+            value = params.require(:creature).permit(:name, :description, :hp, :atk, :def, :agility, 
+            :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity,
+            :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url,
+            :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg,
+            :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id,
+            :activepet, :remote_activepet_url, :activepet_cache)
+         elsif(type == "Page")
+            value = params[:page]
+         else
+            raise "Invalid type detected!"
+         end
+         return value
+      end
+
       def validatePetStats(level)
          minhp = 16
          minatk = 2
@@ -59,29 +83,6 @@ module CreaturesHelper
          end
       end
 
-      def getCreatureParams(type)
-         value = ""
-         if(type == "Id")
-            value = params[:id]
-         elsif(type == "CreatureId")
-            value = params[:creature_id]
-         elsif(type == "User")
-            value = params[:user_id]
-         elsif(type == "Creature")
-            #Add Knowledge here later
-            value = params.require(:creature).permit(:name, :description, :hp, :atk, :def, :agility, 
-            :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity,
-            :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url,
-            :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg,
-            :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id,
-            :activepet, :remote_activepet_url, :activepet_cache)
-         elsif(type == "Page")
-            value = params[:page]
-         else
-            raise "Invalid type detected!"
-         end
-         return value
-      end
 
       def indexCommons
          if(optional)
@@ -309,35 +310,38 @@ module CreaturesHelper
                            #These points might change for purchases
                            #Might be changed to cost something different
                            pointsForCreature = (creatureFound.cost * 0.60).round
-                           if(!creatureFound.pointsreceived)
-                              pouch = Pouch.find_by_user_id(creatureFound.user_id)
-                              pouch.amount += pointsForCreature
+
+                           Creature price
+                           
+                           basecost = creatureFound.creaturetype.basecost
+                           creaturecost = Fieldcost.find_by_name("Creature")
+                           petcost = (creatureFound.cost * 0.10).round
+                           price = (basecost + creaturecost + petcost)
+                           pouch = Pouch.find_by_user_id(creatureFound.user_id)
+                           #Add dreyterrium cost later
+                           if(pouch.amount - price >= 0)
+                              @creature = creatureFound
+                              @creature.save
+                              pouch.amount -= price
                               @pouch = pouch
                               @pouch.save
 
-                              #Adds the oc points to the economy
+                              #Adds the creature points to the economy
                               newTransaction = Economy.new(params[:economy])
                               newTransaction.econtype = "Content"
                               newTransaction.content_type = "Creature"
-                              newTransaction.name = "Source"
-                              newTransaction.amount = pointsForCreature
+                              newTransaction.name = "Sink"
+                              newTransaction.amount = price
                               newTransaction.user_id = creatureFound.user_id
                               newTransaction.created_on = currentTime
                               @economytransaction = newTransaction
                               @economytransaction.save
-                              creatureFound.pointsreceived = true
+                              ContentMailer.content_approved(@creature, "Creature", price).deliver_now
+                              value = "#{@creature.user.vname}'s creature #{@creature.name} was approved."
+                           else
+                              flash[:error] = "Insufficient funds to create a creature!"
+                              redirect_to user_path(logged_in.id)
                            end
-                           @creature = creatureFound
-                           @creature.save
-                           ContentMailer.content_approved(@creature, "Creature", pointsForCreatures).deliver_now
-                           #allWatches = Watch.all
-                           #watchers = allWatches.select{|watch| (((watch.watchtype.name == "Arts" || watch.watchtype.name == "Blogarts") || (watch.watchtype.name == "Artsounds" || watch.watchtype.name == "Artmovies")) || (watch.watchtype.name == "Maincontent" || watch.watchtype.name == "All")) && watch.from_user.id != @art.user_id}
-                           #if(watchers.count > 0)
-                           #   watchers.each do |watch|
-                           #      UserMailer.new_art(@art, watch).deliver
-                           #   end
-                           #end
-                           value = "#{@creature.user.vname}'s creature #{@creature.name} was approved."
                         else
                            @creature = creatureFound
                            ContentMailer.content_denied(@creature, "Creature").deliver_now
@@ -353,6 +357,25 @@ module CreaturesHelper
                   end
                else
                   redirect_to root_path
+               end
+            elsif(type == "shop")
+               allMode = Maintenancemode.find_by_id(1)
+               creatureMode = Maintenancemode.find_by_id(10)
+               if(allMode.maintenance_on || creatureMode.maintenance_on)
+                  if(allMode.maintenance_on)
+                     render "/start/maintenance"
+                  else
+                     render "/creatures/maintenance"
+                  end
+               else
+                  logged_in = current_user
+                  if(logged_in)
+                     allCreatures = Creature.order("reviewed_on desc, created_on desc")
+                     creaturesReviewed = allCreatures.select{|creature| (creature.reviewed && (logged_in.partners.count > 0 || (logged_in.partners.count == 0 && creature.starter)))}
+                     @creatures = Kaminari.paginate_array(creaturesReviewed).page(getCreatureParams("Page")).per(9)
+                  else
+                     redirect_to root_path
+                  end
                end
             end
          end

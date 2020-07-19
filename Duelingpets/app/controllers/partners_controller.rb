@@ -1,5 +1,5 @@
-class CreaturesController < ApplicationController
-   include CreaturesHelper
+class PartnersController < ApplicationController
+   include PartnersHelper
 
    def index
       mode "index"
@@ -29,23 +29,11 @@ class CreaturesController < ApplicationController
       mode "destroy"
    end
 
-   def review
-      mode "review"
-   end
-
-   def approve
-      mode "approve"
-   end
-
-   def deny
-      mode "deny"
-   end
-
    def list
       mode "list"
    end
 
-   def shop
-      mode "shop"
+   def setactive
+      mode "setactive"
    end
 end

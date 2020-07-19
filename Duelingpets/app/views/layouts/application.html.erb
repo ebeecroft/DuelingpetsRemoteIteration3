@@ -106,32 +106,6 @@
       <!--End of CSS Code section-->
 
       <p><%= image_tag(displayType("Banner"), id: "banner") %></p>
-
-      <!--Alert section-->
-      <% if current_user %>
-         <div class="profile">
-            <p><%= userprofile("User") %></p>
-            <p><%= getClock %></p>
-            <p>Pouch: <%= current_user.pouch.amount %> points</p>
-            <p>Emeralds: <%= current_user.pouch.emeraldamount %></p>
-            <p>Notifications: Coming Soon!</p>
-            <br>
-            <p><%= button_to "Active Users", activeusers_path, method: :get, class: "button submitbutton" %></p>
-         </div>
-         <% if checkforAlerts > 0 %>
-            <div class="profile">
-               <p>Alerts:</p>
-               <p><%= userAlertNotify.html_safe %></p>
-            </div>
-         <% end %>
-      <% else %>
-         <div class="profile">
-            <p><%= userprofile("Guest") %></p>
-            <p><%= getClock %></p>
-         </div>
-      <% end %>
-      <!--End of Alert section-->
-
       <!--User Activity section-->
       <div class="navindent">
          <div id="activity">Online: <%= getUserStatus("Online") %> Inactive: <%= getUserStatus("Inactive") %> Offline: <%= getUserStatus("Offline") %> Gone: <%= getUserStatus("Gone") %></div>
@@ -146,6 +120,43 @@
          <% end %>
          <div class="navigation"><%= link_to "Hub World", hubworld_path %></div>
       </div>
+      <!--Alert section-->
+      <% if current_user %>
+         <div class="profile">
+            <p><%= userprofile("User") %></p>
+            <p><%= getClock %></p>
+            <p>Pouch: <%= current_user.pouch.amount %> points</p>
+            <p>Emeralds: <%= current_user.pouch.emeraldamount %></p>
+            <p>Notifications: <%#= link_to getNotifications("All"), notification_path %></p>
+            <p>Pagealerts: <%#= link_to pagealerts, notification_path %></p>
+            <br>
+            <p><%= button_to "Active Users", activeusers_path, method: :get, class: "button submitbutton" %></p>
+            <p><%= button_to "Open Inventory", user_inventory_path(current_user, current_user.inventory), method: :get, class: "button submitbutton" %></p>
+            <% if activePet.to_s != "" %>
+               <br>
+               <p><%= link_to activePet.name, user_partner_path(current_user, activePet) %></p>
+               <% if activePet.creature.image.to_s != "" %>
+                  <p><%= image_tag(activePet.creature.image_url(:thumb), :width => 60) %></p>
+               <% end %>
+               <p>Type: <%= activePet.creature.name %></p>
+               <p>Phylevel: <%= activePet.plevel %></p>
+               <p>Magilevel: <%= activePet.mlevel %></p>
+               <p>HP: <%= activePet.chp %>/<%= activePet.hp %></p>
+               <p>MP: <%= activePet.cmp %>/<%= activePet.mp %></p>
+               <p>Hunger: <%= activePet.chunger %>/<%= activePet.hunger %></p>
+               <p>Thirst: <%= activePet.cthirst %>/<%= activePet.thirst %></p>
+               <p>Fun: <%= activePet.cfun %>/<%= activePet.fun %></p>
+               <p>Lives: <%= activePet.lives %></p>
+               <p>Rarity: <%= activePet.creature.rarity %></p>
+            <% end %>
+         </div>
+      <% else %>
+         <div class="profile">
+            <p><%= userprofile("Guest") %></p>
+            <p><%= getClock %></p>
+         </div>
+      <% end %>
+      <!--End of Alert section-->
       <br>
       <% if current_user && !current_user.pouch.expiretime.nil? %>
          <p id="sessionindent"><%= current_user.vname %>'s session expires in: <%= distance_of_time_in_words_to_now current_user.pouch.expiretime %></p>
