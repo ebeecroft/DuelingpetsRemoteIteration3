@@ -17,20 +17,6 @@ module DragonhoardsHelper
          return value
       end
 
-      def vacationFunds
-         allPouches = Pouch.all
-         vacation = 0
-         pouches = allPouches.select{|pouch| pouch.privilege != "Bot" && pouch.privilege != "Glitchy" && pouch.privilege != "Admin" && pouch.amount > 0}
-         pouches.each do |pouch|
-            points = (pouch.amount * 0.30).round
-            vacation += points
-            pouch.amount -= points
-            @pouch = pouch
-            @pouch.save
-         end
-         return vacation
-      end
-
       def getEmeraldPrice(type)
          price = 0
          if(type == "Buy")
@@ -184,8 +170,35 @@ module DragonhoardsHelper
                else
                   redirect_to root_path
                end
+            elsif(type == "donate" || type == "donatepost")
+               hoard = Dragonhoard.find_by_id(1)
+               logged_in = current_user
+               if(hoard && logged_in)
+                  if(type == "donatepost")
+                     amount = (params[:session][:amount]).to_i
+                     if(!amount.nil? && amount > 0)
+                        if(logged_in.pouch.amount - amount >= 0)
+                           logged_in.pouch.amount -= amount
+                           hoard.vacationpoints += amount
+                           @pouch = logged_in.pouch
+                           @pouch.save
+                           @hoard = hoard
+                           @hoard.save
+                           flash[:success] = "You donated #{amount} points to the central bank!"
+                           redirect_to dragonhoards_path
+                        else
+                           flash[:error]  = "You don't have that many points!"
+                           redirect_to root_path
+                        end
+                     else
+                        flash[:error] = "Invalid data detected!"
+                        redirect_to root_path
+                     end
+                  end
+               else
+                  redirect_to root_path
+               end
             elsif(type == "vacationmode" || type == "getvacationpoints" || type == "transfer")
-               #Eventually have a setting to remove points from vacation to go to treasury
                hoard = Dragonhoard.find_by_id(1)
                logged_in = current_user
                if(hoard && (logged_in && logged_in.pouch.privilege == "Glitchy"))
@@ -193,21 +206,17 @@ module DragonhoardsHelper
                      if(hoard.denholiday)
                         #Will be removed in iteration 3
                         hoard.denholiday = false
-                        #Returns from vacation
-                        #Should reduce vacation points
-                        #points = (hoard.vacationpoints * 0.40).round
-                        #hoard.vacationpoints = points
                         flash[:success] = "Glitchy has now returned from his vacation!"
                      else
                         hoard.denholiday = true
-                        #hoard.vacationpoints = vacationFunds
                         flash[:success] = "Glitchy is now on vacation!"
                      end
                   else
                      if(!hoard.denholiday)
                         if(type == "getvacationpoints")
                            if(hoard.vacationpoints > 0)
-                              points = hoard.vacationpoints
+                              tax = (hoard.vacationpoints * 0.20).round
+                              points = hoard.vacationpoints - tax
                               hoard.treasury += points
                               hoard.vacationpoints = 0
                               flash[:success] = "#{points} vacationpoints were added to the treasury!"

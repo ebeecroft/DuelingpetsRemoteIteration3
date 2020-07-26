@@ -6,7 +6,7 @@
 <% @ratecosts.each do |ratecost| %>
    <div class="pageformat">
       <div class="container"><p>Name: <%= ratecost.name %></p></div> <div class="container"><%= button_to 'Edit', edit_dragonhoard_ratecost_path(ratecost.dragonhoard, ratecost), method: :get, class: "button editbutton" %></div>
-      <div class="container">Amount: <%= ratecost.amount %></div> <div class="container"><%= button_to "Increase", ratecosts_increase_path(ratecost), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to "Decrease", ratecost_path(ratecost), method: :post, class: "button destroybutton" %></div>
+      <div class="container">Amount: <%= ratecost.amount %></div> <div class="container"><%= button_to "Increase", ratecosts_increase_path(ratecost), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to "Decrease", ratecosts_decrease_path(ratecost), method: :post, class: "button destroybutton" %></div>
       <br>
       <p>Econtype: <%= ratecost.econtype %></p>
       <p>Baserate: <%= ratecost.baseinc.name %></p>

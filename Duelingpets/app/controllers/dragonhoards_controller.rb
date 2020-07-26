@@ -40,4 +40,12 @@ class DragonhoardsController < ApplicationController
    def transfer
       mode "transfer"
    end
+
+   def donate
+      mode "donate"
+   end
+
+   def donatepost
+      mode "donatepost"
+   end
 end

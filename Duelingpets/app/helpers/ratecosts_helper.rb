@@ -90,7 +90,7 @@ module RatecostsHelper
                         redirect_to root_path
                      else
                         hoard = Dragonhoard.find_by_id(ratecostFound.dragonhoard_id)
-                        basecost = 400
+                        basecost = hoard.basecost
                         if(hoard.treasury - basecost > -1)
                            #Decreases the points left in the dragonhoard
                            ratecostFound.amount = pointchange

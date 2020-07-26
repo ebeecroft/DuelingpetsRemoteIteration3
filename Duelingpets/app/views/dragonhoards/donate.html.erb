@@ -1,0 +1,13 @@
+<% provide(:h1, "Donate") %>
+<%= form_for(:session, url: dragonhoards_donatepost_path) do |form| %>
+  <div class="pageformat">
+    <%= form.label :amount %>
+    <%= form.number_field :amount %>
+  </div>
+  <br>
+  <div class="pageformat">
+    <%= form.submit "Donate", class: "button submitbutton" %>
+  </div>
+  <br>
+  <p class="formlinks"><%= link_to 'Back', dragonhoards_path %></p>
+<% end %>
