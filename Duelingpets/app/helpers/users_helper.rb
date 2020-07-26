@@ -159,9 +159,9 @@ module UsersHelper
             logged_in = current_user
             if(logged_in && ((logged_in.id == userFound.id) || logged_in.pouch.privilege == "Admin"))
                @user = userFound
+               allAccounts = Accounttype.order("created_on desc")
+               @groups = allAccounts
                if(type == "update")
-                  allAccounts = Accounttype.order("created_on desc")
-                  @accounttypes = allAccounts
                   if(@user.update(user_params))
                      flash[:success] = "#{@user.vname} was successfully updated."
                      redirect_to user_path(@user)

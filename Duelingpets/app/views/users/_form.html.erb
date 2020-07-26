@@ -14,50 +14,62 @@
     <%= form.label :firstname %>
     <%= form.text_field :firstname %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :lastname %>
     <%= form.text_field :lastname %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :country %>
     <%= form.text_field :country %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :country_timezone, "Timezone(logged_in only view)" %>
     <%= form.time_zone_select :country_timezone, ActiveSupport::TimeZone.us_zones %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :birthday, "Birthday(logged_in only view)" %>
     <%= form.date_select :birthday, start_year: Date.today.year - 170, end_year: Date.today.year %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :login_id %>
     <%= form.text_field :login_id %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :vname %>
     <%= form.text_field :vname %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :accounttype_id, "Select Account" %>
-    <%= form.collection_select(:accounttype_id, @accounttypes, :id, :name) %>
+    <%= form.collection_select(:accounttype_id, @groups, :id, :name) %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :shared %>
     <%= form.check_box :shared %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :password %>
     <%= form.password_field :password %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :password_confirmation, "Password Confirmation" %>
     <%= form.password_field :password_confirmation %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.submit class: "button submitbutton" %>
   </div>
