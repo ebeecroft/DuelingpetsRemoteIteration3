@@ -44,4 +44,8 @@ class ItemsController < ApplicationController
    def list
       mode "list"
    end
+
+   def shop
+      mode "shop"
+   end
 end

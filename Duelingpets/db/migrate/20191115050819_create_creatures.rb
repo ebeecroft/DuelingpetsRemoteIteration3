@@ -35,7 +35,6 @@ class CreateCreatures < ActiveRecord::Migration[5.2]
       t.datetime :reviewed_on
       t.integer :user_id
       t.integer :creaturetype_id
-      t.boolean :pointsreceived, default: false
       t.boolean :reviewed, default: false
 
       t.timestamps

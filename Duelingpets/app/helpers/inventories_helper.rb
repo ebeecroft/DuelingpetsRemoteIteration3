@@ -34,6 +34,8 @@ module InventoriesHelper
                   if(logged_in.id == inventoryFound.user_id)
                      @user = logged_in
                      @inventory = inventoryFound
+                     slots = @inventory.inventoryslots.all
+                     @inventoryslots = Kaminari.paginate_array(slots).page(getInventoryParams("Page")).per(1)
                   end
                else
                   redirect_to root_path

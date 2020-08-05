@@ -94,10 +94,6 @@
     <%= form.label :equipable %>
     <%= form.check_box :equipable %>
   </div>
-  <div class="pageformat">
-    <%= form.label :starter %>
-    <%= form.check_box :starter %>
-  </div>
   <p class="pageformat">Item art</p>
   <div class="pageformat">
      <%= image_tag @item.itemart_url(:thumb).to_s if @item.itemart? %>

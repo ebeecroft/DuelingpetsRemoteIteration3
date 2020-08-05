@@ -14,7 +14,7 @@ class ItemartUploader < CarrierWave::Uploader::Base
    end
 
    version :thumb do
-      process :resize_to_fit => [40, 40]
+      process :resize_to_fit => [60, 60]
    end
 
    def extension_white_list

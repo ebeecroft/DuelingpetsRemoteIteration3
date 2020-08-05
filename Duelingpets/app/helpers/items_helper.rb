@@ -267,35 +267,35 @@ module ItemsHelper
                         if(type == "approve")
                            itemFound.reviewed = true
                            itemFound.reviewed_on = currentTime
-                           itempoints = Fieldcost.find_by_name("Item")
-                           pointsForItems = itempoints.amount
-                           @item = itemFound
-                           @item.save
+                           basecost = itemFound.itemtype.basecost
+                           itemcost = Fieldcost.find_by_name("Item")
+                           purchasecost = (itemFound.cost * 0.10).round
+                           price = (basecost + itemcost + purchasecost)
                            pouch = Pouch.find_by_user_id(@item.user_id)
-                           pouch.amount += pointsForItem
-                           @pouch = pouch
-                           @pouch.save
+                           #Add dreyterrium cost later
+                           if(pouch.amount - price >= 0)
+                              @item = itemFound
+                              @item.save
+                              pouch.amount -= price
+                              @pouch = pouch
+                              @pouch.save
 
-                           #Adds the oc points to the economy
-                           newTransaction = Economy.new(params[:economy])
-                           newTransaction.econtype = "Content"
-                           newTransaction.content_type = "Item"
-                           newTransaction.name = "Source"
-                           newTransaction.amount = pointsForItem
-                           newTransaction.user_id = itemFound.user_id
-                           newTransaction.created_on = currentTime
-                           @economytransaction = newTransaction
-                           @economytransaction.save
-
-                           ContentMailer.content_approved(@item, "Item", pointsForItem).deliver_now
-                           #allWatches = Watch.all
-                           #watchers = allWatches.select{|watch| (((watch.watchtype.name == "Arts" || watch.watchtype.name == "Blogarts") || (watch.watchtype.name == "Artsounds" || watch.watchtype.name == "Artmovies")) || (watch.watchtype.name == "Maincontent" || watch.watchtype.name == "All")) && watch.from_user.id != @art.user_id}
-                           #if(watchers.count > 0)
-                           #   watchers.each do |watch|
-                           #      UserMailer.new_art(@art, watch).deliver
-                           #   end
-                           #end
-                           value = "#{@item.user.vname}'s item #{@item.name} was approved."
+                              #Adds the creature points to the economy
+                              newTransaction = Economy.new(params[:economy])
+                              newTransaction.econtype = "Content"
+                              newTransaction.content_type = "Item"
+                              newTransaction.name = "Sink"
+                              newTransaction.amount = price
+                              newTransaction.user_id = itemFound.user_id
+                              newTransaction.created_on = currentTime
+                              @economytransaction = newTransaction
+                              @economytransaction.save
+                              ContentMailer.content_approved(@item, "Item", price).deliver_now
+                              value = "#{@item.user.vname}'s item #{@item.name} was approved."
+                           else
+                              flash[:error] = "Insufficient funds to create an item!"
+                              redirect_to user_path(logged_in.id)
+                           end
                         else
                            @item = itemFound
                            ContentMailer.content_denied(@item, "Item").deliver_now
@@ -311,6 +311,28 @@ module ItemsHelper
                   end
                else
                   redirect_to root_path
+               end
+            elsif(type == "shop")
+               allMode = Maintenancemode.find_by_id(1)
+               itemMode = Maintenancemode.find_by_id(9)
+               if(allMode.maintenance_on || itemMode.maintenance_on)
+                  if(allMode.maintenance_on)
+                     render "/start/maintenance"
+                  else
+                     render "/items/maintenance"
+                  end
+               else
+                  logged_in = current_user
+                  if(logged_in)
+                     allItems = Item.order("reviewed_on desc, created_on desc")
+                     allSlots = Inventoryslot.all
+                     myslots = allSlots.select{|slot| slot.inventory_id == logged_in.inventory.id}
+                     @slots = myslots
+                     itemsReviewed = allItems.select{|item| item.reviewed}
+                     @items = Kaminari.paginate_array(itemsReviewed).page(getItemParams("Page")).per(9)
+                  else
+                     redirect_to root_path
+                  end
                end
             end
          end

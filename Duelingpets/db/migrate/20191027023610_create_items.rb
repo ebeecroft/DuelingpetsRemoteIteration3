@@ -4,32 +4,30 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string :name
       t.text :description
       t.string :itemart
-      t.integer :hp
-      t.integer :atk
-      t.integer :def
-      t.integer :agility
-      t.integer :strength
-      t.integer :mp
-      t.integer :matk
-      t.integer :mdef
-      t.integer :magi
-      t.integer :mstr
-      t.integer :hunger
-      t.integer :thirst
-      t.integer :fun
-      t.integer :durability
-      t.integer :rarity
+      t.integer :hp, default: 0
+      t.integer :atk, default: 0
+      t.integer :def, default: 0
+      t.integer :agility, default: 0
+      t.integer :strength, default: 0
+      t.integer :mp, default: 0
+      t.integer :matk, default: 0
+      t.integer :mdef, default: 0
+      t.integer :magi, default: 0
+      t.integer :mstr, default: 0
+      t.integer :hunger, default: 0
+      t.integer :thirst, default: 0
+      t.integer :fun, default: 0
+      t.integer :durability, default: 1
+      t.integer :rarity, default: 1
       t.boolean :retireditem, default: false
-      t.boolean :starter, default: false
       t.boolean :equipable, default: false
-      t.integer :emeraldcost
+      t.integer :emeraldcost, default: 0
       t.integer :cost
       t.datetime :created_on
       t.datetime :reviewed_on
       t.datetime :updated_on
       t.integer :user_id
       t.integer :itemtype_id
-      t.boolean :pointsreceived, default: false
       t.boolean :reviewed, default: false
 
       t.timestamps

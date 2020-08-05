@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_18_025745) do
+ActiveRecord::Schema.define(version: 2020_07_29_002247) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -434,29 +434,120 @@ ActiveRecord::Schema.define(version: 2020_07_18_025745) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "inventoryslots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "inventory_id"
+    t.integer "item1_id"
+    t.integer "curdur1", default: 0
+    t.integer "startdur1", default: 0
+    t.integer "qty1", default: 0
+    t.integer "rarity1", default: 0
+    t.integer "itemcost1", default: 0
+    t.integer "item2_id"
+    t.integer "curdur2", default: 0
+    t.integer "startdur2", default: 0
+    t.integer "qty2", default: 0
+    t.integer "rarity2", default: 0
+    t.integer "itemcost2", default: 0
+    t.integer "item3_id"
+    t.integer "curdur3", default: 0
+    t.integer "startdur3", default: 0
+    t.integer "qty3", default: 0
+    t.integer "rarity3", default: 0
+    t.integer "itemcost3", default: 0
+    t.integer "item4_id"
+    t.integer "curdur4", default: 0
+    t.integer "startdur4", default: 0
+    t.integer "qty4", default: 0
+    t.integer "rarity4", default: 0
+    t.integer "itemcost4", default: 0
+    t.integer "item5_id"
+    t.integer "curdur5", default: 0
+    t.integer "startdur5", default: 0
+    t.integer "qty5", default: 0
+    t.integer "rarity5", default: 0
+    t.integer "itemcost5", default: 0
+    t.integer "item6_id"
+    t.integer "curdur6", default: 0
+    t.integer "startdur6", default: 0
+    t.integer "qty6", default: 0
+    t.integer "rarity6", default: 0
+    t.integer "itemcost6", default: 0
+    t.integer "item7_id"
+    t.integer "curdur7", default: 0
+    t.integer "startdur7", default: 0
+    t.integer "qty7", default: 0
+    t.integer "rarity7", default: 0
+    t.integer "itemcost7", default: 0
+    t.integer "item8_id"
+    t.integer "curdur8", default: 0
+    t.integer "startdur8", default: 0
+    t.integer "qty8", default: 0
+    t.integer "rarity8", default: 0
+    t.integer "itemcost8", default: 0
+    t.integer "item9_id"
+    t.integer "curdur9", default: 0
+    t.integer "startdur9", default: 0
+    t.integer "qty9", default: 0
+    t.integer "rarity9", default: 0
+    t.integer "itemcost9", default: 0
+    t.integer "item10_id"
+    t.integer "curdur10", default: 0
+    t.integer "startdur10", default: 0
+    t.integer "qty10", default: 0
+    t.integer "rarity10", default: 0
+    t.integer "itemcost10", default: 0
+    t.integer "item11_id"
+    t.integer "curdur11", default: 0
+    t.integer "startdur11", default: 0
+    t.integer "qty11", default: 0
+    t.integer "rarity11", default: 0
+    t.integer "itemcost11", default: 0
+    t.integer "item12_id"
+    t.integer "curdur12", default: 0
+    t.integer "startdur12", default: 0
+    t.integer "qty12", default: 0
+    t.integer "rarity12", default: 0
+    t.integer "itemcost12", default: 0
+    t.integer "item13_id"
+    t.integer "curdur13", default: 0
+    t.integer "startdur13", default: 0
+    t.integer "qty13", default: 0
+    t.integer "rarity13", default: 0
+    t.integer "itemcost13", default: 0
+    t.integer "item14_id"
+    t.integer "curdur14", default: 0
+    t.integer "startdur14", default: 0
+    t.integer "qty14", default: 0
+    t.integer "rarity14", default: 0
+    t.integer "itemcost14", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "itemart"
-    t.integer "hp"
-    t.integer "atk"
-    t.integer "def"
-    t.integer "agility"
-    t.integer "strength"
-    t.integer "mp"
-    t.integer "matk"
-    t.integer "mdef"
-    t.integer "magi"
-    t.integer "mstr"
-    t.integer "hunger"
-    t.integer "thirst"
-    t.integer "fun"
-    t.integer "durability"
-    t.integer "rarity"
+    t.integer "hp", default: 0
+    t.integer "atk", default: 0
+    t.integer "def", default: 0
+    t.integer "agility", default: 0
+    t.integer "strength", default: 0
+    t.integer "mp", default: 0
+    t.integer "matk", default: 0
+    t.integer "mdef", default: 0
+    t.integer "magi", default: 0
+    t.integer "mstr", default: 0
+    t.integer "hunger", default: 0
+    t.integer "thirst", default: 0
+    t.integer "fun", default: 0
+    t.integer "durability", default: 1
+    t.integer "rarity", default: 1
     t.boolean "retireditem", default: false
     t.boolean "starter", default: false
     t.boolean "equipable", default: false
-    t.integer "emeraldcost"
+    t.integer "emeraldcost", default: 0
     t.integer "cost"
     t.datetime "created_on"
     t.datetime "reviewed_on"
@@ -591,7 +682,7 @@ ActiveRecord::Schema.define(version: 2020_07_18_025745) do
     t.string "name"
     t.text "description"
     t.integer "plevel"
-    t.integer "pexp"
+    t.integer "pexp", default: 0
     t.integer "chp"
     t.integer "hp"
     t.integer "atk"
@@ -599,7 +690,7 @@ ActiveRecord::Schema.define(version: 2020_07_18_025745) do
     t.integer "agility"
     t.integer "strength"
     t.integer "mlevel"
-    t.integer "mexp"
+    t.integer "mexp", default: 0
     t.integer "cmp"
     t.integer "mp"
     t.integer "matk"

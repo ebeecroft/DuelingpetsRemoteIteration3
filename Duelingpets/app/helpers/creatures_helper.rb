@@ -306,13 +306,6 @@ module CreaturesHelper
                            #Might revise this section later
                            creatureFound.reviewed = true
                            creatureFound.reviewed_on = currentTime
-
-                           #These points might change for purchases
-                           #Might be changed to cost something different
-                           pointsForCreature = (creatureFound.cost * 0.60).round
-
-                           Creature price
-                           
                            basecost = creatureFound.creaturetype.basecost
                            creaturecost = Fieldcost.find_by_name("Creature")
                            petcost = (creatureFound.cost * 0.10).round
