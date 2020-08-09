@@ -108,25 +108,25 @@ module StartHelper
                firstContent = Colorscheme.first.created_on.year
             end
          elsif(type == "Gallery")
-            #allContents = Gallery.all
-            #if(allContents.count != 0)
-               #firstContent = Gallery.first.created_on.year
-            #end
+            allContents = Gallery.all
+            if(allContents.count != 0)
+               firstContent = Gallery.first.created_on.year
+            end
          elsif(type == "Mainfolder")
-            #allContents = Mainfolder.all
-            #if(allContents.count != 0)
-               #firstContent = Mainfolder.first.created_on.year
-            #end
+            allContents = Mainfolder.all
+            if(allContents.count != 0)
+               firstContent = Mainfolder.first.created_on.year
+            end
          elsif(type == "Subfolder")
-            #allContents = Subfolder.all
-            #if(allContents.count != 0)
-               #firstContent = Subfolder.first.created_on.year
-            #end
+            allContents = Subfolder.all
+            if(allContents.count != 0)
+               firstContent = Subfolder.first.created_on.year
+            end
          elsif(type == "Art")
-            #allContents = Art.all
-            #if(allContents.count != 0)
-               #firstContent = Art.first.created_on.year
-            #end
+            allContents = Art.all
+            if(allContents.count != 0)
+               firstContent = Art.first.created_on.year
+            end
          elsif(type == "Jukebox")
             allContents = Jukebox.all
             if(allContents.count != 0)

@@ -11,10 +11,8 @@ class CreateDragonhoards < ActiveRecord::Migration[5.2]
       t.float :baserate, limit: 53
       t.integer :treasury, default: 0
       t.integer :contestpoints, default: 0
-      t.integer :vacationpoints, default: 0
       t.integer :profit, default: 0
       t.integer :emeralds, default: 0
-      t.boolean :denholiday, default: false
       t.string :dragonimage
 
       t.timestamps

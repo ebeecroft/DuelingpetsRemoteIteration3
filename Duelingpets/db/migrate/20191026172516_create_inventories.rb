@@ -1,6 +1,7 @@
 class CreateInventories < ActiveRecord::Migration[5.2]
   def change
     create_table :inventories do |t|
+      t.integer :capacity
       t.integer :user_id
 
       t.timestamps

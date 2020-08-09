@@ -21,41 +21,18 @@
          <br>
       <% end %>
       <p class="textindent"><%= textFormater("Multi", @dragonhoard.message, "All").html_safe %></p>
-      <% if @dragonhoard.denholiday %>
-         <br>
-         <p>Glitchy the dragon is on holiday and all sources of points have been disabled!</p>
-      <% end %>
       <br>
       <% if current_user && current_user.pouch.privilege == "Glitchy" %>
          <p>Base cost: <%= @dragonhoard.basecost %></p>
          <p>Base rate: <%= @dragonhoard.baserate %></p>
-         <div class="container">Contest points: <%= @dragonhoard.contestpoints %></div>
-         <% if !@dragonhoard.denholiday %>
-            <div class="container"><%= button_to "Transfer points to Glitchy!", dragonhoards_transfer_path, method: :post, class: "button submitbutton" %></div>
-            <br>
-         <% end %>
+         <div class="container">Contest points: <%= @dragonhoard.contestpoints %></div> <div class="container"><%= button_to "Transfer points to Glitchy!", dragonhoards_transfer_path, method: :post, class: "button submitbutton" %></div>
+         <br>
       <% end %>
       <% if current_user && current_user.pouch.privilege == "Glitchy" %>
          <div class="container">Profit: <%= @dragonhoard.profit %></div>
          <div class="container"><%= button_to 'Withdraw points', dragonhoards_withdraw_path(:dragonhoard_id=>@dragonhoard.id), method: :post, class: "button submitbutton" %></div>
          <br>
-         <div class="container">Donated points: <%= @dragonhoard.vacationpoints %></div>
-         <% if current_user %>
-            <div class="container"><%= button_to "Donate!", dragonhoards_donate_path, method: :get, class: "button submitbutton" %></div>
-         <% end %>
-         <% if !@dragonhoard.denholiday %>
-            <div class="container"><%= button_to "Retrieve points!", dragonhoards_getvacationpoints_path, method: :post, class: "button submitbutton" %></div>
-            <br>
-         <% end %>
-         <div class="container">On vacation: <%= @dragonhoard.denholiday %></div>
-         <% if !@dragonhoard.denholiday %>
-            <div class="container"><%= button_to "Go on vacation!", dragonhoards_vacationmode_path, method: :post, class: "button submitbutton" %></div>
-         <% else %>
-            <div class="container"><%= button_to "Return from vacation!", dragonhoards_vacationmode_path, method: :post, class: "button submitbutton" %></div>
-         <% end %>
-         <br>
-         <div class="container"><p>Treasury: <%= @dragonhoard.treasury %></p></div>
-         <div class="container"><%= button_to 'Convert points', dragonhoards_convertpoints_path, method: :post, class: "button submitbutton" %></div>
+         <div class="container"><p>Treasury: <%= @dragonhoard.treasury %></p></div> <div class="container"><%= button_to 'Convert points', dragonhoards_convertpoints_path, method: :post, class: "button submitbutton" %></div>
          <br>
       <% else %>
          <p>Treasury: <%= @dragonhoard.treasury %></p>
@@ -65,10 +42,8 @@
                <div class="container"><%= button_to "Buy Emeralds for " + getEmeraldPrice("Buy").to_s, dragonhoards_buyemeralds_path(:dragonhoard_id=>@dragonhoard.id), method: :post, class: "button submitbutton" %></div>
                <br>
             <% end %>
-            <div class="container"><%= button_to "Donate!", dragonhoards_donate_path, method: :get, class: "button submitbutton" %></div>
          <% else %>
             <p>Emeralds: <%= @dragonhoard.emeralds %></p>
-            <p>Donation points: <%= @dragonhoard.vacationpoints %></p>
          <% end %>
       <% end %>
       <br>

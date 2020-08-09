@@ -1,5 +1,6 @@
 class Partner < ApplicationRecord
    #Partners related
+   has_one :equip, :foreign_key => "partner_id", :dependent => :destroy
    belongs_to :user, optional: true
    belongs_to :creature, optional: true
 

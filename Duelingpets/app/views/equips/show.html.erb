@@ -1,0 +1,7 @@
+<% provide(:h1, @equip.partner.name + "'s Equipment") %>
+<p id="notice"><%= notice %></p>
+<div class="pageformat">
+   <p><%#= button_to "New Equippouch", new_equip_equipslot_path(@equip), method: :get, class: "button submitbutton" %></p>
+</div>
+<br>
+<p class="formlinks"><%= link_to "Back", user_partner_path(@equip.partner.user, @equip.partner) %></p>

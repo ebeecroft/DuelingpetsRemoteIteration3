@@ -29,23 +29,7 @@ class DragonhoardsController < ApplicationController
       mode "convertpoints"
    end
 
-   def vacationmode
-      mode "vacationmode"
-   end
-
-   def getvacationpoints
-      mode "getvacationpoints"
-   end
-
    def transfer
       mode "transfer"
-   end
-
-   def donate
-      mode "donate"
-   end
-
-   def donatepost
-      mode "donatepost"
    end
 end

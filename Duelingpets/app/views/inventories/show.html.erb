@@ -13,126 +13,222 @@
             <p><%= image_tag(getItem(inventoryslot.item1_id, "Itemart")) %></p>
          <% end %>
          <% if(getItem(inventoryslot.item1_id, "Retired")) %>
-            <p><%= getItem(inventoryslot.item1_id, "Name") + " [Retired]" %></p>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item1_id, "Name"), user_item_path(getItem(inventoryslot.item1_id, "Artist"), getItem(inventoryslot.item1_id, "Name")) + " [Retired]" %></p>
          <% else %>
-             <p><%= getItem(inventoryslot.item1_id, "Name") %></p>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item1_id, "Name"), user_item_path(getItem(inventoryslot.item1_id, "Artist"), getItem(inventoryslot.item1_id, "Name")) %></p>
          <% end %>
-         <p>Durability: <%= inventoryslot.curdur1 %>/<%= inventoryslot.startdur1 %></p>
-         <% if(getItem(inventoryslot.item1_id, "Itemtype") != "Food") %>
-            <p>Attack: <%= getItem(inventoryslot.item1_id, "Atk") %></p>
-            <p>Defense: <%= getItem(inventoryslot.item1_id, "Def") %></p>
-            <p>Agility: <%= getItem(inventoryslot.item1_id, "Agility") %></p>
-            <p>Strength: <%= getItem(inventoryslot.item1_id, "Strength") %></p>
-         <% elsif(getItem(inventoryslot.item1_id, "Itemtype") == "Magic") %>
-            <p>Matk: <%= getItem(inventoryslot.item1_id, "Matk") %></p>
-            <p>Mdef: <%= getItem(inventoryslot.item1_id, "Mdef") %></p>
-            <p>Magi: <%= getItem(inventoryslot.item1_id, "Magi") %></p>
-            <p>Mstr: <%= getItem(inventoryslot.item1_id, "Mstr") %></p>
-         <% else %>
-            <p>HP: <%= getItem(inventoryslot.item1_id, "HP") %></p>
-            <p>MP: <%= getItem(inventoryslot.item1_id, "MP") %>
-            <p>Hunger: <%= getItem(inventoryslot.item1_id, "Hunger") %></p>
-            <p>Thirst: <%= getItem(inventoryslot.item1_id, "Thirst") %></p>
-            <p>Fun: <%= getItem(inventoryslot.item1_id, "Fun") %></p>
-         <% end %>
-         <p>Quantity: <%= inventoryslot.qty1 %></p>
-         <p>Rarity: <%= inventoryslot.rarity1 %></p>
-         <p>Cost: <%= getItem(inventoryslot.item1_id, "Cost") %></p>
-         <p>Emerald cost: <%= getItem(inventoryslot.item1_id, "Emerald") %></p>
+         <%= itemView2(inventoryslot.item1_id, inventoryslot.curdur1, inventoryslot.startdur1, "Middle") %>
+         <%= itemView(inventoryslot.item1_id, inventoryslot.qty1) %>
          <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item1_id, "Artist")) %><%= link_to getItem(inventoryslot.item1_id, "Artist").vname, user_path(getItem(inventoryslot.item1_id, "Artist")) %></p>
-         <p>Equipable: <%= getItem(inventoryslot.item1_id, "Equip") %></p>
-         <p>Type: <%= getItem(inventoryslot.item1_id, "Itemtype") %></p>
+         <%= itemView2(inventoryslot.item1_id, inventoryslot.curdur1, inventoryslot.startdur1, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item2_id.nil? %>
-         <p>Item 2: <%= inventoryslot.item2_id %></p>
-         <p>Durability: <%= inventoryslot.curdur2 %>/<%= inventoryslot.startdur2 %></p>
-         <p>Quantity: <%= inventoryslot.qty2 %></p>
-         <p>Rarity: <%= inventoryslot.rarity2 %></p>
+         <% if getItem(inventoryslot.item2_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item2_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item2_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item2_id, "Name"), user_item_path(getItem(inventoryslot.item2_id, "Artist"), getItem(inventoryslot.item2_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item2_id, "Name"), user_item_path(getItem(inventoryslot.item2_id, "Artist"), getItem(inventoryslot.item2_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item2_id, inventoryslot.curdur2, inventoryslot.startdur2, "Middle") %>
+         <%= itemView(inventoryslot.item2_id, inventoryslot.qty2) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item2_id, "Artist")) %><%= link_to getItem(inventoryslot.item2_id, "Artist").vname, user_path(getItem(inventoryslot.item2_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item2_id, inventoryslot.curdur2, inventoryslot.startdur2, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item3_id.nil? %>
-         <p>Item 3: <%= inventoryslot.item3_id %></p>
-         <p>Durability: <%= inventoryslot.curdur3 %>/<%= inventoryslot.startdur3 %></p>
-         <p>Quantity: <%= inventoryslot.qty3 %></p>
-         <p>Rarity: <%= inventoryslot.rarity3 %></p>
+         <% if getItem(inventoryslot.item3_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item3_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item3_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item3_id, "Name"), user_item_path(getItem(inventoryslot.item3_id, "Artist"), getItem(inventoryslot.item3_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item3_id, "Name"), user_item_path(getItem(inventoryslot.item3_id, "Artist"), getItem(inventoryslot.item3_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item3_id, inventoryslot.curdur3, inventoryslot.startdur3, "Middle") %>
+         <%= itemView(inventoryslot.item3_id, inventoryslot.qty3) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item3_id, "Artist")) %><%= link_to getItem(inventoryslot.item3_id, "Artist").vname, user_path(getItem(inventoryslot.item3_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item3_id, inventoryslot.curdur3, inventoryslot.startdur3, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item4_id.nil? %>
-         <p>Item 4: <%= inventoryslot.item4_id %></p>
-         <p>Durability: <%= inventoryslot.curdur4 %>/<%= inventoryslot.startdur4 %></p>
-         <p>Quantity: <%= inventoryslot.qty4 %></p>
-         <p>Rarity: <%= inventoryslot.rarity4 %></p>
+         <% if getItem(inventoryslot.item4_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item4_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item4_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item4_id, "Name"), user_item_path(getItem(inventoryslot.item4_id, "Artist"), getItem(inventoryslot.item4_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item4_id, "Name"), user_item_path(getItem(inventoryslot.item4_id, "Artist"), getItem(inventoryslot.item4_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item4_id, inventoryslot.curdur4, inventoryslot.startdur4, "Middle") %>
+         <%= itemView(inventoryslot.item4_id, inventoryslot.qty4) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item4_id, "Artist")) %><%= link_to getItem(inventoryslot.item4_id, "Artist").vname, user_path(getItem(inventoryslot.item4_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item4_id, inventoryslot.curdur4, inventoryslot.startdur4, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item5_id.nil? %>
-         <p>Item 5: <%= inventoryslot.item5_id %></p>
-         <p>Durability: <%= inventoryslot.curdur5 %>/<%= inventoryslot.startdur5 %></p>
-         <p>Quantity: <%= inventoryslot.qty5 %></p>
-         <p>Rarity: <%= inventoryslot.rarity5 %></p>
+         <% if getItem(inventoryslot.item5_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item5_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item5_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item5_id, "Name"), user_item_path(getItem(inventoryslot.item5_id, "Artist"), getItem(inventoryslot.item5_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item5_id, "Name"), user_item_path(getItem(inventoryslot.item5_id, "Artist"), getItem(inventoryslot.item5_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item5_id, inventoryslot.curdur5, inventoryslot.startdur5, "Middle") %>
+         <%= itemView(inventoryslot.item5_id, inventoryslot.qty5) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item5_id, "Artist")) %><%= link_to getItem(inventoryslot.item5_id, "Artist").vname, user_path(getItem(inventoryslot.item5_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item5_id, inventoryslot.curdur5, inventoryslot.startdur5, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item6_id.nil? %>
-         <p>Item 6: <%= inventoryslot.item6_id %></p>
-         <p>Durability: <%= inventoryslot.curdur6 %>/<%= inventoryslot.startdur6 %></p>
-         <p>Quantity: <%= inventoryslot.qty6 %></p>
-         <p>Rarity: <%= inventoryslot.rarity6 %></p>
+         <% if getItem(inventoryslot.item6_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item6_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item6_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item6_id, "Name"), user_item_path(getItem(inventoryslot.item6_id, "Artist"), getItem(inventoryslot.item6_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item6_id, "Name"), user_item_path(getItem(inventoryslot.item6_id, "Artist"), getItem(inventoryslot.item6_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item6_id, inventoryslot.curdur6, inventoryslot.startdur6, "Middle") %>
+         <%= itemView(inventoryslot.item6_id, inventoryslot.qty6) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item6_id, "Artist")) %><%= link_to getItem(inventoryslot.item6_id, "Artist").vname, user_path(getItem(inventoryslot.item6_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item6_id, inventoryslot.curdur6, inventoryslot.startdur6, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item7_id.nil? %>
-         <p>Item 7: <%= inventoryslot.item7_id %></p>
-         <p>Durability: <%= inventoryslot.curdur7 %>/<%= inventoryslot.startdur7 %></p>
-         <p>Quantity: <%= inventoryslot.qty7 %></p>
-         <p>Rarity: <%= inventoryslot.rarity7 %></p>
+         <% if getItem(inventoryslot.item7_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item7_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item7_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item7_id, "Name"), user_item_path(getItem(inventoryslot.item7_id, "Artist"), getItem(inventoryslot.item7_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item7_id, "Name"), user_item_path(getItem(inventoryslot.item7_id, "Artist"), getItem(inventoryslot.item7_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item7_id, inventoryslot.curdur7, inventoryslot.startdur7, "Middle") %>
+         <%= itemView(inventoryslot.item7_id, inventoryslot.qty7) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item7_id, "Artist")) %><%= link_to getItem(inventoryslot.item7_id, "Artist").vname, user_path(getItem(inventoryslot.item7_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item7_id, inventoryslot.curdur7, inventoryslot.startdur7, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item8_id.nil? %>
-         <p>Item 8: <%= inventoryslot.item8_id %></p>
-         <p>Durability: <%= inventoryslot.curdur8 %>/<%= inventoryslot.startdur8 %></p>
-         <p>Quantity: <%= inventoryslot.qty8 %></p>
-         <p>Rarity: <%= inventoryslot.rarity8 %></p>
+         <% if getItem(inventoryslot.item8_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item8_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item8_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item8_id, "Name"), user_item_path(getItem(inventoryslot.item8_id, "Artist"), getItem(inventoryslot.item8_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item8_id, "Name"), user_item_path(getItem(inventoryslot.item8_id, "Artist"), getItem(inventoryslot.item8_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item8_id, inventoryslot.curdur8, inventoryslot.startdur8, "Middle") %>
+         <%= itemView(inventoryslot.item8_id, inventoryslot.qty8) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item8_id, "Artist")) %><%= link_to getItem(inventoryslot.item8_id, "Artist").vname, user_path(getItem(inventoryslot.item8_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item8_id, inventoryslot.curdur8, inventoryslot.startdur8, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item9_id.nil? %>
-         <p>Item 9: <%= inventoryslot.item9_id %></p>
-         <p>Durability: <%= inventoryslot.curdur9 %>/<%= inventoryslot.startdur9 %></p>
-         <p>Quantity: <%= inventoryslot.qty9 %></p>
-         <p>Rarity: <%= inventoryslot.rarity9 %></p>
+         <% if getItem(inventoryslot.item9_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item9_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item9_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item9_id, "Name"), user_item_path(getItem(inventoryslot.item9_id, "Artist"), getItem(inventoryslot.item9_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item9_id, "Name"), user_item_path(getItem(inventoryslot.item9_id, "Artist"), getItem(inventoryslot.item9_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item9_id, inventoryslot.curdur9, inventoryslot.startdur9, "Middle") %>
+         <%= itemView(inventoryslot.item9_id, inventoryslot.qty9) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item9_id, "Artist")) %><%= link_to getItem(inventoryslot.item9_id, "Artist").vname, user_path(getItem(inventoryslot.item9_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item9_id, inventoryslot.curdur9, inventoryslot.startdur9, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item10_id.nil? %>
-         <p>Item 10: <%= inventoryslot.item10_id %></p>
-         <p>Durability: <%= inventoryslot.curdur10 %>/<%= inventoryslot.startdur10 %></p>
-         <p>Quantity: <%= inventoryslot.qty10 %></p>
-         <p>Rarity: <%= inventoryslot.rarity10 %></p>
+         <% if getItem(inventoryslot.item10_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item10_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item10_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item10_id, "Name"), user_item_path(getItem(inventoryslot.item10_id, "Artist"), getItem(inventoryslot.item10_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item10_id, "Name"), user_item_path(getItem(inventoryslot.item10_id, "Artist"), getItem(inventoryslot.item10_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item10_id, inventoryslot.curdur10, inventoryslot.startdur10, "Middle") %>
+         <%= itemView(inventoryslot.item10_id, inventoryslot.qty10) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item10_id, "Artist")) %><%= link_to getItem(inventoryslot.item10_id, "Artist").vname, user_path(getItem(inventoryslot.item10_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item10_id, inventoryslot.curdur10, inventoryslot.startdur10, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item11_id.nil? %>
-         <p>Item 11: <%= inventoryslot.item11_id %></p>
-         <p>Durability: <%= inventoryslot.curdur11 %>/<%= inventoryslot.startdur11 %></p>
-         <p>Quantity: <%= inventoryslot.qty11 %></p>
-         <p>Rarity: <%= inventoryslot.rarity11 %></p>
+         <% if getItem(inventoryslot.item11_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item11_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item11_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item11_id, "Name"), user_item_path(getItem(inventoryslot.item11_id, "Artist"), getItem(inventoryslot.item11_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item11_id, "Name"), user_item_path(getItem(inventoryslot.item11_id, "Artist"), getItem(inventoryslot.item11_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item11_id, inventoryslot.curdur11, inventoryslot.startdur11, "Middle") %>
+         <%= itemView(inventoryslot.item11_id, inventoryslot.qty11) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item11_id, "Artist")) %><%= link_to getItem(inventoryslot.item11_id, "Artist").vname, user_path(getItem(inventoryslot.item11_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item11_id, inventoryslot.curdur11, inventoryslot.startdur11, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item12_id.nil? %>
-         <p>Item 12: <%= inventoryslot.item12_id %></p>
-         <p>Durability: <%= inventoryslot.curdur12 %>/<%= inventoryslot.startdur12 %></p>
-         <p>Quantity: <%= inventoryslot.qty12 %></p>
-         <p>Rarity: <%= inventoryslot.rarity12 %></p>
+         <% if getItem(inventoryslot.item12_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item12_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item12_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item12_id, "Name"), user_item_path(getItem(inventoryslot.item12_id, "Artist"), getItem(inventoryslot.item12_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item12_id, "Name"), user_item_path(getItem(inventoryslot.item12_id, "Artist"), getItem(inventoryslot.item12_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item12_id, inventoryslot.curdur12, inventoryslot.startdur12, "Middle") %>
+         <%= itemView(inventoryslot.item12_id, inventoryslot.qty12) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item12_id, "Artist")) %><%= link_to getItem(inventoryslot.item12_id, "Artist").vname, user_path(getItem(inventoryslot.item12_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item12_id, inventoryslot.curdur12, inventoryslot.startdur12, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item13_id.nil? %>
-         <p>Item 13: <%= inventoryslot.item13_id %></p>
-         <p>Durability: <%= inventoryslot.curdur13 %>/<%= inventoryslot.startdur13 %></p>
-         <p>Quantity: <%= inventoryslot.qty13 %></p>
-         <p>Rarity: <%= inventoryslot.rarity13 %></p>
+         <% if getItem(inventoryslot.item13_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item13_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item13_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item13_id, "Name"), user_item_path(getItem(inventoryslot.item13_id, "Artist"), getItem(inventoryslot.item13_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item13_id, "Name"), user_item_path(getItem(inventoryslot.item13_id, "Artist"), getItem(inventoryslot.item13_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item13_id, inventoryslot.curdur13, inventoryslot.startdur13, "Middle") %>
+         <%= itemView(inventoryslot.item13_id, inventoryslot.qty13) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item13_id, "Artist")) %><%= link_to getItem(inventoryslot.item13_id, "Artist").vname, user_path(getItem(inventoryslot.item13_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item13_id, inventoryslot.curdur13, inventoryslot.startdur13, "End") %>
          <br>
       <% end %>
       <% if !inventoryslot.item14_id.nil? %>
-         <p>Item 14: <%= inventoryslot.item14_id %></p>
-         <p>Durability: <%= inventoryslot.curdur14 %>/<%= inventoryslot.startdur14 %></p>
-         <p>Quantity: <%= inventoryslot.qty14 %></p>
-         <p>Rarity: <%= inventoryslot.rarity14 %></p>
+         <% if getItem(inventoryslot.item14_id, "Itemartcheck").to_s != "" %>
+            <br>
+            <p><%= image_tag(getItem(inventoryslot.item14_id, "Itemart")) %></p>
+         <% end %>
+         <% if(getItem(inventoryslot.item14_id, "Retired")) %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item14_id, "Name"), user_item_path(getItem(inventoryslot.item14_id, "Artist"), getItem(inventoryslot.item14_id, "Name")) + " [Retired]" %></p>
+         <% else %>
+            <p class="formlinks"><%= link_to getItem(inventoryslot.item14_id, "Name"), user_item_path(getItem(inventoryslot.item14_id, "Artist"), getItem(inventoryslot.item14_id, "Name")) %></p>
+         <% end %>
+         <%= itemView2(inventoryslot.item14_id, inventoryslot.curdur14, inventoryslot.startdur14, "Middle") %>
+         <%= itemView(inventoryslot.item14_id, inventoryslot.qty14) %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(getItem(inventoryslot.item14_id, "Artist")) %><%= link_to getItem(inventoryslot.item14_id, "Artist").vname, user_path(getItem(inventoryslot.item14_id, "Artist")) %></p>
+         <%= itemView2(inventoryslot.item14_id, inventoryslot.curdur14, inventoryslot.startdur14, "End") %>
          <br>
       <% end %>
    <% end %>

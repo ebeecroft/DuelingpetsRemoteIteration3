@@ -190,6 +190,11 @@ module PartnersHelper
                            validPurchase = ((((logged_in.pouch.amount - @partner.adoptcost >= 0) && (logged_in.pouch.emeraldamount - @partner.creature.emeraldcost >= 0)) && logged_in.partners.count != 0) || (@partner.creature.starter && logged_in.partners.count == 0))
                            if(validPurchase)
                               if(@partner.save)
+                                 #Builds the partners equipbag
+                                 newEquip = @partner.equips.new(params[:equip])
+                                 @equip = newEquip
+                                 @equip.save
+
                                  if(logged_in.partners.count > 0)
                                     #This may originally come from the warehouse
                                     logged_in.pouch.amount -= @partner.adoptcost
