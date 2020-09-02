@@ -212,6 +212,9 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.boolean "democolor", default: false
     t.string "backgroundcolor"
     t.string "headercolor"
+    t.string "subheader1color"
+    t.string "subheader2color"
+    t.string "subheader3color"
     t.string "textcolor"
     t.string "defaultbuttoncolor"
     t.string "defaultbuttonbackgcolor"

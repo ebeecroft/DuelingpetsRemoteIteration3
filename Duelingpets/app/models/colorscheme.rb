@@ -2,6 +2,7 @@ class Colorscheme < ApplicationRecord
    #Colorscheme related
    has_many :userinfos
    has_one :webcontrol, :foreign_key => "daycolor_id"
+   has_one :webcontrol, :foreign_key => "nightcolor_id"
    belongs_to :user, optional: true
 
    #Regex information for colorscheme
@@ -13,6 +14,9 @@ class Colorscheme < ApplicationRecord
    validates :description, presence: true
    validates :backgroundcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :headercolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
+   validates :subheader1color, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
+   validates :subheader2color, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
+   validates :subheader3color, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :textcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :navigationcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :navigationlinkcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}

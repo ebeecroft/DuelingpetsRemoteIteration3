@@ -9,6 +9,12 @@ module ColorschemeretrievalHelper
                value = usercolor.backgroundcolor
             elsif(attribute == "Header")
                value = usercolor.headercolor
+            elsif(attribute == "Subheader1")
+               value = usercolor.subheader1color
+            elsif(attribute == "Subheader2")
+               value = usercolor.subheader2color
+            elsif(attribute == "Subheader3")
+               value = usercolor.subheader3color
             elsif(attribute == "Text")
                value = usercolor.textcolor
             elsif(attribute == "Navigation")
@@ -78,6 +84,12 @@ module ColorschemeretrievalHelper
                value = default.backgroundcolor
             elsif(attribute == "Header")
                value = default.headercolor
+            elsif(attribute == "Subheader1")
+               value = default.subheader1color
+            elsif(attribute == "Subheader2")
+               value = default.subheader2color
+            elsif(attribute == "Subheader3")
+               value = default.subheader3color
             elsif(attribute == "Text")
                value = default.textcolor
             elsif(attribute == "Navigation")

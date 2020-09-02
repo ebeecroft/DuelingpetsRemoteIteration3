@@ -1,5 +1,30 @@
 module ColorschemesHelper
+
    private
+      def getColorParams(type)
+         value = ""
+         if(type == "User")
+            value = params[:user_id]
+         elsif(type == "Colorscheme")
+            value = params.require(:colorscheme).permit(:name, :description, :activated, :backgroundcolor, 
+            :headercolor, :subheader1color, :subheader2color, :subheader3color, :textcolor,
+            :defaultbuttoncolor, :defaultbuttonbackgcolor, :editbuttoncolor, :editbuttonbackgcolor,
+            :destroybuttoncolor, :destroybuttonbackgcolor, :submitbuttoncolor, :submitbuttonbackgcolor,
+            :navigationcolor, :navigationlinkcolor, :navigationhovercolor, :navigationhoverbackgcolor,
+            :onlinestatuscolor, :profilecolor, :profilevisitedcolor, :profilehovercolor,
+            :profilehoverbackgcolor, :sessioncolor, :navlinkcolor, :navlinkhovercolor,
+            :navlinkhoverbackgcolor, :explanationborder, :explanationbackgcolor, :explanheadercolor,
+            :explanheaderbackgcolor, :errorfieldcolor, :errorcolor, :warningcolor, :notificationcolor,
+            :successcolor)
+         elsif(type == "Page")
+            value = params[:page]
+         else
+            raise "Invalid type detected!"
+         end
+         return value
+      end
+
+      #Is back button necessary?
       def backButton
          somevalue = params[:user_id]
          if(somevalue)
@@ -26,6 +51,21 @@ module ColorschemesHelper
             end
          end
          return value
+      end
+
+      def indexCommons
+         allColors = Colorscheme.order("created_on desc")
+         if(getColorParams("User"))
+            userFound = User.find_by_vname(getColorParams("User"))
+            if(userFound)
+               allColors = userFound.colorschemes.order("created_on desc")
+               @user = userFound
+            else
+               render "webcontrols/crazybat"
+            end
+         end
+         activatedColors = allColors.select{|colorscheme| colorscheme.activated || (current_user && (colorscheme.user_id == current_user.id))}
+         @colorschemes = Kaminari.paginate_array(activatedColors).page(getColorParams("Page")).per(10)
       end
 
       def editCommons(type)
@@ -91,43 +131,6 @@ module ColorschemesHelper
          else
             render "webcontrols/crazybat"
          end
-      end
-
-      def indexCommons
-         allColors = Colorscheme.order("created_on desc")
-         if(getColorParams("User"))
-            userFound = User.find_by_vname(getColorParams("User"))
-            if(userFound)
-               allColors = userFound.colorschemes.order("created_on desc")
-               @user = userFound
-            else
-               render "webcontrols/crazybat"
-            end
-         end
-         activatedColors = allColors.select{|colorscheme| colorscheme.activated || (current_user && (colorscheme.user_id == current_user.id))}
-         @colorschemes = Kaminari.paginate_array(activatedColors).page(getColorParams("Page")).per(10)
-      end
-
-      def getColorParams(type)
-         value = ""
-         if(type == "User")
-            value = params[:user_id]
-         elsif(type == "Colorscheme")
-            value = params.require(:colorscheme).permit(:name, :description, :activated, :backgroundcolor, 
-            :headercolor, :textcolor, :defaultbuttoncolor, :defaultbuttonbackgcolor, :editbuttoncolor,
-            :editbuttonbackgcolor, :destroybuttoncolor, :destroybuttonbackgcolor, :submitbuttoncolor,
-            :submitbuttonbackgcolor, :navigationcolor, :navigationlinkcolor, :navigationhovercolor,
-            :navigationhoverbackgcolor, :onlinestatuscolor, :profilecolor, :profilevisitedcolor,
-            :profilehovercolor, :profilehoverbackgcolor, :sessioncolor, :navlinkcolor, :navlinkhovercolor,
-            :navlinkhoverbackgcolor, :explanationborder, :explanationbackgcolor, :explanheadercolor,
-            :explanheaderbackgcolor, :errorfieldcolor, :errorcolor, :warningcolor, :notificationcolor,
-            :successcolor)
-         elsif(type == "Page")
-            value = params[:page]
-         else
-            raise "Invalid type detected!"
-         end
-         return value
       end
 
       def mode(type)
