@@ -1,6 +1,5 @@
-class InventoryslotsController < ApplicationController
-   include InventoryslotsHelper
-   include SlotparamsHelper
+class ItemactionsController < ApplicationController
+   include ItemactionsHelper
 
    def index
       mode "index"
@@ -24,9 +23,5 @@ class InventoryslotsController < ApplicationController
 
    def destroy
       mode "destroy"
-   end
-
-   def purchase
-      mode "purchase"
    end
 end

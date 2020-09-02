@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
    include ItemsHelper
+   include SlotparamsHelper
 
    def index
       mode "index"
@@ -47,5 +48,25 @@ class ItemsController < ApplicationController
 
    def shop
       mode "shop"
+   end
+
+   def junkdealer
+      mode "junkdealer"
+   end
+
+   def yesitem
+      mode "yesitem"
+   end
+
+   def noitem
+      mode "noitem"
+   end
+
+   def choose
+      mode "choose"
+   end
+
+   def choosepost
+      mode "choosepost"
    end
 end

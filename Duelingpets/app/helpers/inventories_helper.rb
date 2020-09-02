@@ -33,9 +33,13 @@ module InventoriesHelper
                if(inventoryFound && logged_in)
                   if(logged_in.id == inventoryFound.user_id)
                      @user = logged_in
+                     allActions = Itemaction.all
+                     actions = allActions.select{|action| action.name == "Discard" || action.name == "Equip"}
+                     @actiongroup = actions
                      @inventory = inventoryFound
                      slots = @inventory.inventoryslots.all
                      @inventoryslots = Kaminari.paginate_array(slots).page(getInventoryParams("Page")).per(1)
+                     #raise "I work here"
                   end
                else
                   redirect_to root_path

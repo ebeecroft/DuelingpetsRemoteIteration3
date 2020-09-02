@@ -1,4 +1,8 @@
-<% provide(:h1, @item.name) %>
+<% if @item.retireditem %>
+   <% provide(:h1, @item.name + " [Retired]") %>
+<% else %>
+   <% provide(:h1, @item.name) %>
+<% end %>
 <p id="notice"><%= notice %></p>
 <div class="pageformat">
    <% if current_user && (current_user.id == @item.user_id || current_user.pouch.privilege == "Admin") %>
@@ -14,30 +18,14 @@
       <p><%= image_tag(@item.itemart_url(:thumb)) %></p>
    <% end %>
    <br>
-   <p>Hp: <%= @item.hp %></p>
-   <p>Atk: <%= @item.atk %></p>
-   <p>Def: <%= @item.def %></p>
-   <p>Agi: <%= @item.agility %></p>
-   <p>Strength: <%= @item.strength %></p>
-   <p>MP: <%= @item.mp %></p>
-   <p>Matk: <%= @item.matk %></p>
-   <p>Mdef: <%= @item.mdef %></p>
-   <p>Magi: <%= @item.magi %></p>
-   <p>Mstr: <%= @item.mstr %></p>
-   <p>Hunger: <%= @item.hunger %></p>
-   <p>Thirst: <%= @item.thirst %></p>
-   <p>Fun: <%= @item.fun %></p>
    <p>Durability: <%= @item.durability %></p>
-   <p>Equipable: <%= @item.equipable %></p>
    <p>Rarity: <%= @item.rarity %></p>
-   <p>Retired item: <%= @item.retireditem %></p>
-   <p>Emerald cost: <%= @item.emeraldcost %></p>
-   <p>Cost: <%= @item.cost %></p>
+   <p>Equipable: <%= @item.equipable %></p>
    <p>Type: <%= @item.itemtype.name %></p>
-   <br>
-   <p class="textindent"><%= textFormater("Multi", @item.description, "All").html_safe %></p>
-   <br>
+   <p>Cost: <%= @item.cost %></p>
+   <p>Emeralds: <%= @item.emeraldcost %></p>
    <% if @item.user.userinfo.miniavatar.to_s != "" %>
+      <br>
       <p><%= image_tag(@item.user.userinfo.miniavatar_url(:thumb)) %></p>
    <% end %>
    <p class="formlinks">Artist: <%= getUserPrivilege(@item.user) %><%= link_to @item.user.vname, user_path(@item.user) %></p>
@@ -46,6 +34,11 @@
          for <%= distance_of_time_in_words_to_now getTime(@item.user) %>
       <% end %>
    </p>
+   <br>
+   <p>Stats</p>
+   <%= getItemStats(@item, @item.itemtype.name) %>
+   <br>
+   <p class="textindent"><%= textFormater("Multi", @item.description, "All").html_safe %></p>
 </div>
 <br>
 <p class="formlinks"><%= link_to "User Items", user_items_path(@item.user) %> |

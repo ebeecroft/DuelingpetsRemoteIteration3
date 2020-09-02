@@ -16,11 +16,6 @@ class CreatePouches < ActiveRecord::Migration[5.2]
       t.integer :amount, default: 0
       t.integer :emeraldamount, default: 0
       t.integer :dreyterriumamount, default: 0
-      t.integer :pouchlevel, default: 0
-      t.integer :oclevel, default: 0
-      t.integer :bloglevel, default: 0
-      t.integer :emeraldlevel, default: 0
-      t.integer :dreyterriumlevel, default: 0
       t.boolean :firstdreyterrium, default: false
 
       t.timestamps

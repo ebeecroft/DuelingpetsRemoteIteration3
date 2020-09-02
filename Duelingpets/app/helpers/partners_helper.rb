@@ -191,7 +191,8 @@ module PartnersHelper
                            if(validPurchase)
                               if(@partner.save)
                                  #Builds the partners equipbag
-                                 newEquip = @partner.equips.new(params[:equip])
+                                 newEquip = Equip.new(params[:equip])
+                                 newEquip.partner_id = newPartner.id
                                  @equip = newEquip
                                  @equip.save
 

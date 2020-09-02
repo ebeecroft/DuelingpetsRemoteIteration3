@@ -1,6 +1,53 @@
 module ItemsHelper
 
    private
+      def getItemParams(type)
+         value = ""
+         if(type == "Id")
+            value = params[:id]
+         elsif(type == "ItemId")
+            value = params[:item_id]
+         elsif(type == "User")
+            value = params[:user_id]
+         elsif(type == "Item")
+            value = params.require(:item).permit(:name, :description, :hp, :atk, :def, :agility, :strength,
+            :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :rarity, :starter, :emeraldcost, :itemart, :remote_itemart_url,
+            :itemart_cache, :itemtype_id, :equipable, :durability)
+         elsif(type == "Page")
+            value = params[:page]
+         else
+            raise "Invalid type detected!"
+         end
+         return value
+      end
+
+      def getItemStats(item, type)
+         stats = ""
+         if(type == "Food")
+            msg1 = content_tag(:p, "HP: #{item.hp}")
+            msg2 = content_tag(:p, "Hunger: #{item.hunger}")
+            msg3 = content_tag(:p, "Fun: #{item.fun}")
+            stats = (msg1 + msg2 + msg3)
+         elsif(type == "Drink")
+            msg1 = content_tag(:p, "HP: #{item.hp}")
+            msg2 = content_tag(:p, "Thirst: #{item.thirst}")
+            msg3 = content_tag(:p, "Fun: #{item.fun}")
+            stats = (msg1 + msg2 + msg3)
+         elsif(type == "Weapon")
+            msg1 = content_tag(:p, "Atk: #{item.atk}")
+            msg2 = content_tag(:p, "Def: #{item.def}")
+            msg3 = content_tag(:p, "Agi: #{item.agility}")
+            msg4 = content_tag(:p, "Str: #{item.strength}")
+            stats = (msg1 + msg2 + msg3 + msg4)
+         elsif(type == "Toy")
+            msg1 = content_tag(:p, "Fun: #{item.fun}")
+            msg2 = content_tag(:p, "Hunger: #{item.hunger}")
+            msg3 = content_tag(:p, "Thirst: #{item.thirst}")
+            stats = (msg1 + msg2 + msg3)
+         end
+         return stats
+      end
+
       def validateItemStats(cost)
          #Determines the error message
          if(cost == -1)
@@ -28,26 +75,6 @@ module ItemsHelper
          else
             @item.cost = -5
          end
-      end
-
-      def getItemParams(type)
-         value = ""
-         if(type == "Id")
-            value = params[:id]
-         elsif(type == "ItemId")
-            value = params[:item_id]
-         elsif(type == "User")
-            value = params[:user_id]
-         elsif(type == "Item")
-            value = params.require(:item).permit(:name, :description, :hp, :atk, :def, :agility, :strength,
-            :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :rarity, :starter, :emeraldcost, :itemart, :remote_itemart_url,
-            :itemart_cache, :itemtype_id, :equipable, :durability)
-         elsif(type == "Page")
-            value = params[:page]
-         else
-            raise "Invalid type detected!"
-         end
-         return value
       end
 
       def indexCommons
@@ -165,7 +192,10 @@ module ItemsHelper
                else
                   logged_in = current_user
                   userFound = User.find_by_vname(getItemParams("User"))
-                  if(logged_in && userFound)
+                  passedInValues = params[:format]
+                  if(logged_in && userFound && !passedInValues.nil?)
+                     itemtype = Itemtype.find_by_id(passedInValues)
+                     #raise "My itemtype is: #{itemtype.name}"
                      if(logged_in.id == userFound.id)
                         newItem = logged_in.items.new
                         if(type == "create")
@@ -174,9 +204,14 @@ module ItemsHelper
                            newItem.updated_on = currentTime
                         end
                         #Determines the type of bookgroup the user belongs to
-                        allItemtypes = Itemtype.order("created_on desc")
-                        @itemtypes = allItemtypes
+                        #allItemtypes = Itemtype.order("created_on desc")
+                        #@itemtypes = allItemtypes
 
+                        @itemtype = itemtype
+                        newItem.itemtype_id = itemtype.id
+                        if(itemtype.name == "Weapon" || itemtype.name == "Armor")
+                           newItem.equipable = true
+                        end
                         @item = newItem
                         @user = userFound
 
@@ -270,8 +305,8 @@ module ItemsHelper
                            basecost = itemFound.itemtype.basecost
                            itemcost = Fieldcost.find_by_name("Item")
                            purchasecost = (itemFound.cost * 0.10).round
-                           price = (basecost + itemcost + purchasecost)
-                           pouch = Pouch.find_by_user_id(@item.user_id)
+                           price = (basecost + itemcost.amount + purchasecost)
+                           pouch = Pouch.find_by_user_id(itemFound.user_id)
                            #Add dreyterrium cost later
                            if(pouch.amount - price >= 0)
                               @item = itemFound
@@ -333,6 +368,76 @@ module ItemsHelper
                   else
                      redirect_to root_path
                   end
+               end
+            elsif(type == "junkdealer")
+               logged_in = current_user
+               passedInValues = params[:format]
+               if(logged_in && !passedInValues.nil?)
+                  slotindex, invslot = params[:format].split("/")
+                  if(slotindex.to_s != "" && !invslot.to_s != "")
+                     slot = Inventoryslot.find_by_id(invslot)
+                     if(slot.inventory.user_id == logged_in.id)
+                        #Finds the item the player is trying to get rid of
+                        itemnum = getItemName(slotindex, slot, "Item")
+                        @slotindex = slotindex
+                        @item = itemnum
+                        @invslot = slot
+                        @points = (@item.cost * 0.20).round
+                     else
+                        redirect_to root_path
+                     end
+                  else
+                     redirect_to root_path
+                  end
+               else
+                  raise "Illegal operation!"
+               end
+            elsif(type == "yesitem" || type == "noitem")
+               logged_in = current_user
+               slot = Inventoryslot.find_by_id(params[:inventoryslot_id])
+               slotindex = params[:slotindex_id]
+               if(logged_in && slotindex && slot)
+                  if(slot.inventory.user_id == logged_in.id)
+                     itemcost = getItemName(slotindex, slot, "Points")
+                     if(type == "yesitem")
+                        itemname = getItemName(slotindex, slot, "Name")
+                        updateInventory(slotindex, slot, "Discard")
+                        @inventoryslot = slot
+                        @inventoryslot.save
+                        logged_in.pouch.amount += (itemcost * 0.20)
+                        @pouch = logged_in.pouch
+                        @pouch.save
+                        flash[:success] = "Item #{itemname} was succesfully sold!"
+                        redirect_to user_inventory_path(@inventoryslot.inventory.user, @inventoryslot.inventory)
+                     else
+                        price = ((itemcost * 0.20) * 4)
+                        if(logged_in.pouch.amount - price >= 0)
+                           logged_in.pouch.amount -= price
+                           @pouch = logged_in.pouch
+                           @pouch.save
+                        end
+                        flash[:success] = "No worries youngen, come back when your ready. As you leave the junk dealer you notice your pouch is slightly lighter than it was before."
+                        redirect_to user_path(slot.inventory.user)
+                     end
+                  else
+                     redirect_to root_path
+                  end
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "choose" || type == "choosepost")
+               logged_in = current_user
+               if(logged_in)
+                  #Determines the type of bookgroup the user belongs to
+                  allItemtypes = Itemtype.order("created_on desc")
+                  @itemtypes = allItemtypes
+                  if(type == "choosepost")
+                     itemtype = Itemtype.find_by_id(params[:item][:itemtype_id])
+                     #raise "Hello #{itemtype}"
+                     redirect_to new_user_item_path(logged_in, itemtype.id)
+                  end
+               else
+                  redirect_to root_path
                end
             end
          end

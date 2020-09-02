@@ -37,8 +37,4 @@
    <br>
    <div class="container">Member gallery level: <%= @user.pouch.pouchslot.free9 %>/<%= getUpgrades("Gallery", "Max", @user.pouch, 9) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Gallery", "Cost", @user.pouch, 9).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Gallery", :upnumber=>9), method: :post, class: "button submitbutton" %></div>
    <br>
-   <div class="container">Free partner level: <%= @user.pouch.pouchslot.free10 %>/<%= getUpgrades("Partner", "Max", @user.pouch, 10) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Partner", "Cost", @user.pouch, 10).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Partner", :upnumber=>10), method: :post, class: "button submitbutton" %></div>
-   <br>
-   <div class="container">Member partner level: <%= @user.pouch.pouchslot.free10 %>/<%= getUpgrades("Partner", "Max", @user.pouch, 10) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Partner", "Cost", @user.pouch, 10).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Partner", :upnumber=>10), method: :post, class: "button submitbutton" %></div>
-   <br>
 <% end %>

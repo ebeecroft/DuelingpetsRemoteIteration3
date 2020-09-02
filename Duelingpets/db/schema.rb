@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_08_154045) do
+ActiveRecord::Schema.define(version: 2020_08_12_024203) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -282,7 +282,6 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
     t.datetime "reviewed_on"
     t.integer "user_id"
     t.integer "creaturetype_id"
-    t.boolean "pointsreceived", default: false
     t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -345,10 +344,8 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
     t.float "baserate", limit: 53
     t.integer "treasury", default: 0
     t.integer "contestpoints", default: 0
-    t.integer "vacationpoints", default: 0
     t.integer "profit", default: 0
     t.integer "emeralds", default: 0
-    t.boolean "denholiday", default: false
     t.string "dragonimage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -383,6 +380,38 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
   create_table "equips", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "capacity", default: 3
     t.integer "partner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "equipslots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "equip_id"
+    t.integer "item1_id"
+    t.integer "curdur1", default: 0
+    t.integer "startdur1", default: 0
+    t.integer "item2_id"
+    t.integer "curdur2", default: 0
+    t.integer "startdur2", default: 0
+    t.integer "item3_id"
+    t.integer "curdur3", default: 0
+    t.integer "startdur3", default: 0
+    t.integer "item4_id"
+    t.integer "curdur4", default: 0
+    t.integer "startdur4", default: 0
+    t.integer "item5_id"
+    t.integer "curdur5", default: 0
+    t.integer "startdur5", default: 0
+    t.integer "item6_id"
+    t.integer "curdur6", default: 0
+    t.integer "startdur6", default: 0
+    t.integer "item7_id"
+    t.integer "curdur7", default: 0
+    t.integer "startdur7", default: 0
+    t.integer "item8_id"
+    t.integer "curdur8", default: 0
+    t.integer "startdur8", default: 0
+    t.boolean "activeslot", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -436,6 +465,8 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
   end
 
   create_table "inventories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "capacity", default: 60
+    t.integer "petcapacity", default: 80
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -448,86 +479,65 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
     t.integer "curdur1", default: 0
     t.integer "startdur1", default: 0
     t.integer "qty1", default: 0
-    t.integer "rarity1", default: 0
-    t.integer "itemcost1", default: 0
     t.integer "item2_id"
     t.integer "curdur2", default: 0
     t.integer "startdur2", default: 0
     t.integer "qty2", default: 0
-    t.integer "rarity2", default: 0
-    t.integer "itemcost2", default: 0
     t.integer "item3_id"
     t.integer "curdur3", default: 0
     t.integer "startdur3", default: 0
     t.integer "qty3", default: 0
-    t.integer "rarity3", default: 0
-    t.integer "itemcost3", default: 0
     t.integer "item4_id"
     t.integer "curdur4", default: 0
     t.integer "startdur4", default: 0
     t.integer "qty4", default: 0
-    t.integer "rarity4", default: 0
-    t.integer "itemcost4", default: 0
     t.integer "item5_id"
     t.integer "curdur5", default: 0
     t.integer "startdur5", default: 0
     t.integer "qty5", default: 0
-    t.integer "rarity5", default: 0
-    t.integer "itemcost5", default: 0
     t.integer "item6_id"
     t.integer "curdur6", default: 0
     t.integer "startdur6", default: 0
     t.integer "qty6", default: 0
-    t.integer "rarity6", default: 0
-    t.integer "itemcost6", default: 0
     t.integer "item7_id"
     t.integer "curdur7", default: 0
     t.integer "startdur7", default: 0
     t.integer "qty7", default: 0
-    t.integer "rarity7", default: 0
-    t.integer "itemcost7", default: 0
     t.integer "item8_id"
     t.integer "curdur8", default: 0
     t.integer "startdur8", default: 0
     t.integer "qty8", default: 0
-    t.integer "rarity8", default: 0
-    t.integer "itemcost8", default: 0
     t.integer "item9_id"
     t.integer "curdur9", default: 0
     t.integer "startdur9", default: 0
     t.integer "qty9", default: 0
-    t.integer "rarity9", default: 0
-    t.integer "itemcost9", default: 0
     t.integer "item10_id"
     t.integer "curdur10", default: 0
     t.integer "startdur10", default: 0
     t.integer "qty10", default: 0
-    t.integer "rarity10", default: 0
-    t.integer "itemcost10", default: 0
     t.integer "item11_id"
     t.integer "curdur11", default: 0
     t.integer "startdur11", default: 0
     t.integer "qty11", default: 0
-    t.integer "rarity11", default: 0
-    t.integer "itemcost11", default: 0
     t.integer "item12_id"
     t.integer "curdur12", default: 0
     t.integer "startdur12", default: 0
     t.integer "qty12", default: 0
-    t.integer "rarity12", default: 0
-    t.integer "itemcost12", default: 0
     t.integer "item13_id"
     t.integer "curdur13", default: 0
     t.integer "startdur13", default: 0
     t.integer "qty13", default: 0
-    t.integer "rarity13", default: 0
-    t.integer "itemcost13", default: 0
     t.integer "item14_id"
     t.integer "curdur14", default: 0
     t.integer "startdur14", default: 0
     t.integer "qty14", default: 0
-    t.integer "rarity14", default: 0
-    t.integer "itemcost14", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "itemactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -552,7 +562,6 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
     t.integer "durability", default: 1
     t.integer "rarity", default: 1
     t.boolean "retireditem", default: false
-    t.boolean "starter", default: false
     t.boolean "equipable", default: false
     t.integer "emeraldcost", default: 0
     t.integer "cost"
@@ -561,7 +570,6 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
     t.datetime "updated_on"
     t.integer "user_id"
     t.integer "itemtype_id"
-    t.boolean "pointsreceived", default: false
     t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -783,11 +791,6 @@ ActiveRecord::Schema.define(version: 2020_08_08_154045) do
     t.integer "amount", default: 0
     t.integer "emeraldamount", default: 0
     t.integer "dreyterriumamount", default: 0
-    t.integer "pouchlevel", default: 0
-    t.integer "oclevel", default: 0
-    t.integer "bloglevel", default: 0
-    t.integer "emeraldlevel", default: 0
-    t.integer "dreyterriumlevel", default: 0
     t.boolean "firstdreyterrium", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

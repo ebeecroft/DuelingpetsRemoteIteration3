@@ -31,11 +31,13 @@ module EquipsHelper
                equipFound = Equip.find_by_id(getEquipParams("Id"))
                logged_in = current_user
                if(equipFound && logged_in)
-                  if(logged_in.id == equipFound.user_id)
+                  if(logged_in.id == equipFound.partner.user_id)
                      @user = logged_in
                      @equip = equipFound
+                     @partner = Partner.find_by_id(equipFound.partner_id)
                      slots = @equip.equipslots.all
                      @equipslots = Kaminari.paginate_array(slots).page(getEquipParams("Page")).per(1)
+                     #raise "I work here"
                   end
                else
                   redirect_to root_path

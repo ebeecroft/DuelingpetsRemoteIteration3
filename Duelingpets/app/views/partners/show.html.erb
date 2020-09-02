@@ -1,4 +1,8 @@
-<% provide(:h1, @partner.name) %>
+<% if @partner.activepet %>
+   <% provide(:h1, @partner.name + "[Mainpet]") %>
+<% else %>
+   <% provide(:h1, @partner.name) %>
+<% end %>
 <p id="notice"><%= notice %></p>
 <div class="pageformat">
    <% if current_user && (current_user.id == @partner.user_id || current_user.pouch.privilege == "Admin") %>
@@ -11,8 +15,16 @@
       <p><%= image_tag(@partner.creature.image_url(:thumb)) %></p>
    <% end %>
    <br>
-   <p>Mainpet: <%= @partner.activepet %></p>
    <p>Creature: <%= @partner.creature.name %></p>
+   <p>Slots: <%= @partner.equip.equipslots.count %></p>
+   <% if @partner.inbattle %>
+      <p>Status: In battle</p>
+   <% elsif @partner.dead %>
+      <p>Status: Dead</p>
+   <% else %>
+      <p>Status: Not in battle</p>
+   <% end %>
+   <br>
    <p>Phylevel: <%= @partner.plevel %></p>
    <p>Phyexp: <%= @partner.pexp %></p>
    <p>Hp: <%= @partner.chp %>/<%= @partner.hp %></p>
@@ -20,6 +32,7 @@
    <p>Def: <%= @partner.def %></p>
    <p>Agi: <%= @partner.agility %></p>
    <p>Strength: <%= @partner.strength %></p>
+   <br>
    <p>Magilevel: <%= @partner.mlevel %></p>
    <p>Magiexp: <%= @partner.mexp %></p>
    <p>MP: <%= @partner.cmp %>/<%= @partner.mp %></p>
@@ -27,17 +40,17 @@
    <p>Mdef: <%= @partner.mdef %></p>
    <p>Magi: <%= @partner.magi %></p>
    <p>Mstr: <%= @partner.mstr %></p>
+   <br>
    <p>Hunger: <%= @partner.chunger %>/<%= @partner.hunger %></p>
    <p>Thirst: <%= @partner.cthirst %>/<%= @partner.thirst %></p>
    <p>Fun: <%= @partner.cfun %>/<%= @partner.fun %></p>
    <p>Lives: <%= @partner.lives %></p>
    <p>Adoptcost: <%= @partner.adoptcost %></p>
    <p>Cost: <%= @partner.cost %></p>
+   <br>
    <p>Rarity: <%= @partner.creature.rarity %></p>
    <p>Phytokens: <%= @partner.phytokens %></p>
    <p>Magitokens: <%= @partner.magitokens %></p>
-   <p>Inbattle: <%= @partner.inbattle %></p>
-   <p>Dead: <%= @partner.dead %></p>
    <% if @partner.user.userinfo.miniavatar.to_s != "" %>
       <br>
       <p><%= image_tag(@partner.user.userinfo.miniavatar_url(:thumb)) %></p>
@@ -50,6 +63,10 @@
    </p>
    <br>
    <p class="textindent"><%= textFormater("Multi", @partner.description, "All").html_safe %></p>
+   <% if(current_user && current_user.id == @partner.user_id) %>
+      <br>
+      <p><%= button_to 'Equipment', partner_equip_path(@partner, @partner.equip), method: :get, class: "button submitbutton" %></p>
+   <% end %>
 </div>
 <br>
 <p class="formlinks"><%= link_to "User Partners", user_partners_path(@partner.user) %></p>

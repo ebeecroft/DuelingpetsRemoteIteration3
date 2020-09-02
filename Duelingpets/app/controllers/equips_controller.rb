@@ -1,5 +1,5 @@
 class EquipsController < ApplicationController
-   include InventoriesHelper
+   include EquipsHelper
 
    def index
       mode "index"

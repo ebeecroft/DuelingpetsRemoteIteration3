@@ -66,7 +66,7 @@
    <p>Partner section</p>
    <div class="container"><%= button_to "My Partners", user_partners_path(@user), method: :get, class: "button submitbutton" %></div>
    <br>
-   <p>Partner limit: <%= @user.partners.count %>/<%= getUpgrades("Partner", "Limit", @user.pouch, 10) %></p>
+   <p>Partner limit: <%= @user.partners.count %>/<%#= getUpgrades("Partner", "Limit", @user.pouch, 10) %></p>
 <% end %>
 <!--Partner section end--->
 <!--Gallery section--->
@@ -165,14 +165,14 @@
    <p>Item section</p>
    <div class="container"><%= button_to "My Items", user_items_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id %>
-      <div class="container"><%= button_to "New Item", new_user_item_path(@user), method: :get, class: "button submitbutton" %></div>
+      <div class="container"><%= button_to "New Item", items_choose_path(@user), method: :get, class: "button submitbutton" %></div>
    <% end %>
    <br>
 <% else %>
    <% if current_user && current_user.id == @user.id %>
       <br>
       <p>Item section</p>
-      <p><%= button_to "New Item", new_user_item_path(@user), method: :get, class: "button submitbutton" %></p>
+      <p><%= button_to "New Item", items_choose_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
 <!--Item section end--->

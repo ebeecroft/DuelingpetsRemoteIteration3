@@ -5,16 +5,23 @@
 <% end %>
 <%= form_for(:inventoryslot, url: inventoryslots_purchase_path, method: :post) do |form| %>
    <div class="pageformat">
-      <%= form.collection_select(:inventoryslot_id, @slots, :id, :name) %>
+      <% if @slots.count > 0 %>
+         <p><%= form.collection_select(:inventoryslot_id, @slots, :id, :name) %></p>
+      <% else %>
+         <p>Inventoryslots are required to buy items!</p>
+      <% end %>
    </div>
    <br>
    <% @items.each_with_index do |item, index| %>
       <div class="pageformat">
-         <p>index is: <%= index %></p>
-         <% if index == 0 %>
-            <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %><%= form.radio_button :item_id, item.id, :checked => true %></p>
+         <% if @slots.count > 0 %>
+            <% if index == 0 %>
+               <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %><%= form.radio_button :item_id, item.id, :checked => true %></p>
+            <% else %>
+               <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %><%= form.radio_button :item_id, item.id %></p>
+            <% end %>
          <% else %>
-            <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %><%= form.radio_button :item_id, item.id %></p>
+            <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %></p>
          <% end %>
          <p>Created on: <%= distance_of_time_in_words_to_now item.created_on %> ago on (<%= item.created_on.strftime("%B-%d-%Y") %>)</p>
          <% if !item.reviewed_on.nil? %>
@@ -25,27 +32,13 @@
             <br>
             <p><%= image_tag(item.itemart_url(:thumb)) %></p>
          <% end %>
-         <p>Hp: <%= item.hp %></p>
-         <p>Atk: <%= item.atk %></p>
-         <p>Def: <%= item.def %></p>
-         <p>Agi: <%= item.agility %></p>
-         <p>Strength: <%= item.strength %></p>
          <br>
-         <p>MP: <%= item.mp %></p>
-         <p>Matk: <%= item.matk %></p>
-         <p>Mdef: <%= item.mdef %></p>
-         <p>Magi: <%= item.magi %></p>
-         <p>Mstr: <%= item.mstr %></p>
-         <br>
-         <p>Hunger: <%= item.hunger %></p>
-         <p>Thirst: <%= item.thirst %></p>
-         <p>Fun: <%= item.fun %></p>
          <p>Durability: <%= item.durability %></p>
-         <br>
          <p>Rarity: <%= item.rarity %></p>
-         <p>Emerald cost: <%= item.emeraldcost %></p>
-         <p>Cost: <%= item.cost %></p>
+         <p>Equipable: <%= item.equipable %></p>
          <p>Type: <%= item.itemtype.name %></p>
+         <p>Cost: <%= item.cost %></p>
+         <p>Emeralds: <%= item.emeraldcost %></p>
          <% if item.user.userinfo.miniavatar.to_s != "" %>
             <br>
             <p><%= image_tag(item.user.userinfo.miniavatar_url(:thumb)) %></p>
@@ -56,10 +49,15 @@
                for <%= distance_of_time_in_words_to_now getTime(item.user) %>
             <% end %>
          </p>
+         <br>
+         <p>Stats</p>
+         <%= getItemStats(item, item.itemtype.name) %>
       </div>
       <br>
    <% end %>
-   <div class="pageformat"><%= form.submit "Purchase", class: "button submitbutton" %></div>
-   <br>
+   <% if @slots.count > 0 %>
+      <div class="pageformat"><%= form.submit "Purchase", class: "button submitbutton" %></div>
+      <br>
+   <% end %>
    <p class="formlinks"><%= link_to 'Back', root_path %></p>
 <% end %>

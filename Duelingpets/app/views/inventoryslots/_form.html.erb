@@ -19,5 +19,5 @@
     <%= form.submit class: "button submitbutton" %>
   </div>
   <br>
-  <p class="formlinks"><%= link_to 'Back', user_path(@inventory.user) %></p>
+  <p class="formlinks"><%= link_to 'Back', user_inventory_path(@inventory.user, @inventory) %></p>
 <% end %>
