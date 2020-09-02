@@ -28,4 +28,8 @@ class ColorschemesController < ApplicationController
    def list
       mode "list"
    end
+
+   def undo
+      mode "undo"
+   end
 end

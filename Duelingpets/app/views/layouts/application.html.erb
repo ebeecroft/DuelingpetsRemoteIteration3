@@ -47,8 +47,8 @@
          </div>
       <% end %>
       <% if current_user && !current_user.userinfo.daycolor.activated %>
-         <div id="pageindent">
-            <p><%= button_to 'Revert to Default Color', revertcolor_path, method: :post, class: "button submitbutton" %></p>
+         <div class="pageformat">
+            <p><%= button_to 'Undo color', colorschemes_undo_path, method: :post, class: "button submitbutton" %></p>
             <br>
          </div>
       <% end %>

@@ -79,7 +79,7 @@ module ColorschemesHelper
                end
                @colorscheme = colorschemeFound
                if(type == "update")
-                  if(@colorscheme.update_attributes(params[:colorscheme]))
+                  if(@colorscheme.update_attributes(getColorParams("Colorscheme")))
                      flash[:success] = "#{@colorscheme.name} was successfully updated."
                      if(logged_in.pouch.privilege == "Admin")
                         redirect_to colorschemes_list_path
@@ -130,6 +130,18 @@ module ColorschemesHelper
             end
          else
             render "webcontrols/crazybat"
+         end
+      end
+
+      def undoCommons
+         logged_in = current_user
+         if(logged_in)
+            logged_in.userinfo.daycolor_id = 1
+            logged_in.userinfo.nightcolor_id = 2
+            @userinfo = logged_in.userinfo
+            @userinfo.save
+            flash[:success] = "#{logged_in.vname}'s color was set back to the default!"
+            redirect_to user_path(logged_in)
          end
       end
 
@@ -232,6 +244,22 @@ module ColorschemesHelper
                   @colorschemes = Kaminari.paginate_array(allColors).page(getColorParams("Page")).per(10)
                else
                   redirect_to root_path
+               end
+            elsif(type == "undo")
+               allMode = Maintenancemode.find_by_id(1)
+               userMode = Maintenancemode.find_by_id(6)
+               if(allMode.maintenance_on || userMode.maintenance_on)
+                  if(current_user && current_user.pouch.privilege == "Admin")
+                     undoCommons
+                  else
+                     if(allMode.maintenance_on)
+                        render "/start/maintenance"
+                     else
+                        render "/users/maintenance"
+                     end
+                  end
+               else
+                  undoCommons
                end
             end
          end

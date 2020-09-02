@@ -9,42 +9,42 @@ class CreateColorschemes < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.boolean :activated, default: false
       t.boolean :democolor, default: false
-      t.string :backgroundcolor
-      t.string :headercolor
-      t.string :subheader1color
-      t.string :subheader2color
-      t.string :subheader3color
-      t.string :textcolor
-      t.string :defaultbuttoncolor
-      t.string :defaultbuttonbackgcolor
-      t.string :editbuttoncolor
-      t.string :editbuttonbackgcolor
-      t.string :destroybuttoncolor
-      t.string :destroybuttonbackgcolor
-      t.string :submitbuttoncolor
-      t.string :submitbuttonbackgcolor
-      t.string :navigationcolor
-      t.string :navigationlinkcolor
-      t.string :navigationhovercolor
-      t.string :navigationhoverbackgcolor
-      t.string :onlinestatuscolor
-      t.string :profilecolor
-      t.string :profilevisitedcolor
-      t.string :profilehovercolor
-      t.string :profilehoverbackgcolor
-      t.string :sessioncolor
-      t.string :navlinkcolor
-      t.string :navlinkhovercolor
-      t.string :navlinkhoverbackgcolor
-      t.string :explanationborder
-      t.string :explanationbackgcolor
-      t.string :explanheadercolor
-      t.string :explanheaderbackgcolor
-      t.string :errorfieldcolor
-      t.string :errorcolor
-      t.string :warningcolor
-      t.string :notificationcolor
-      t.string :successcolor
+      t.string :backgroundcolor, default: "#000000"
+      t.string :headercolor, default: "#000000"
+      t.string :subheader1color, default: "#000000"
+      t.string :subheader2color, default: "#000000"
+      t.string :subheader3color, default: "#000000"
+      t.string :textcolor, default: "#000000"
+      t.string :defaultbuttoncolor, default: "#000000"
+      t.string :defaultbuttonbackgcolor, default: "#000000"
+      t.string :editbuttoncolor, default: "#000000"
+      t.string :editbuttonbackgcolor, default: "#000000"
+      t.string :destroybuttoncolor, default: "#000000"
+      t.string :destroybuttonbackgcolor, default: "#000000"
+      t.string :submitbuttoncolor, default: "#000000"
+      t.string :submitbuttonbackgcolor, default: "#000000"
+      t.string :navigationcolor, default: "#000000"
+      t.string :navigationlinkcolor, default: "#000000"
+      t.string :navigationhovercolor, default: "#000000"
+      t.string :navigationhoverbackgcolor, default: "#000000"
+      t.string :onlinestatuscolor, default: "#000000"
+      t.string :profilecolor, default: "#000000"
+      t.string :profilevisitedcolor, default: "#000000"
+      t.string :profilehovercolor, default: "#000000"
+      t.string :profilehoverbackgcolor, default: "#000000"
+      t.string :sessioncolor, default: "#000000"
+      t.string :navlinkcolor, default: "#000000"
+      t.string :navlinkhovercolor, default: "#000000"
+      t.string :navlinkhoverbackgcolor, default: "#000000"
+      t.string :explanationborder, default: "#000000"
+      t.string :explanationbackgcolor, default: "#000000"
+      t.string :explanheadercolor, default: "#000000"
+      t.string :explanheaderbackgcolor, default: "#000000"
+      t.string :errorfieldcolor, default: "#000000"
+      t.string :errorcolor, default: "#000000"
+      t.string :warningcolor, default: "#000000"
+      t.string :notificationcolor, default: "#000000"
+      t.string :successcolor, default: "#000000"
 
       t.timestamps
     end

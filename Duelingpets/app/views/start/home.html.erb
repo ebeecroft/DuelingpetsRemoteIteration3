@@ -1,10 +1,5 @@
 <% provide(:h1, "Welcome to Duelingpets #{homepageAlerts}") %>
 <% if current_user %>
-   <!-- Before this playMusicLoop command there -->
-   <!-- needs to be a way to stop the previous -->
-   <!-- audio -->
-   <!-- Unloading audio starts here -->
-   <!-- Plays the new sound below -->
    <p class="centerpagecontent"><%= playMusicLoop("Homepage", nil) %></p>
    <div class="pageformat">
       <% if current_user.userinfo.mute_on %>
@@ -23,7 +18,7 @@
    </p>
    <% if newestContent("Art").count > 0 %>
       <br>
-      <p>Newest Arts</p>
+      <h2 class="subheader1">Newest Arts</h2>
       <% newestContent("Art").each_with_index do |content, index| %>
          <div class="container">
             <p class="formlinks"><%= link_to content.title, subfolder_art_path(content.subfolder, content) %></p>
@@ -47,7 +42,7 @@
    <% end %>
    <% if newestContent("Movie").count > 0 %>
       <br>
-      <p>Newest Movies</p>
+      <h2 class="subheader1">Newest Movies</h2>
       <% newestContent("Movie").each_with_index do |content, index| %>
          <div class="container">
             <p class="formlinks"><%= link_to content.title, subplaylist_movie_path(content.subplaylist, content) %></p>
@@ -71,7 +66,7 @@
    <% end %>
    <% if newestContent("Chapter").count > 0 %>
       <br>
-      <p>Newest Chapters</p>
+      <h2 class="subheader1">Newest Chapters</h2>
       <% newestContent("Chapter").each_with_index do |content, index| %>
          <p class="formlinks"><%= link_to content.title, book_chapter_path(content.book, content) %></p>
          <p>Created: <%= distance_of_time_in_words_to_now content.created_on %> ago on (<%= content.created_on.strftime("%B-%d-%Y") %>)</p>
@@ -92,7 +87,7 @@
    <% end %>
    <% if newestContent("Sound").count > 0 %>
       <br>
-      <p>Newest Sounds</p>
+      <h2 class="subheader1">Newest Sounds</h2>
       <% newestContent("Sound").each_with_index do |content, index| %>
          <div class="container">
             <p class="formlinks"><%= link_to content.title, subsheet_sound_path(content.subsheet, content) %></p>
@@ -116,7 +111,7 @@
    <% end %>
    <% if newestContent("Creature").count > 0 %>
       <br>
-      <p>Newest Creatures</p>
+      <h2 class="subheader1">Newest Creatures</h2>
       <% newestContent("Creature").each_with_index do |content, index| %>
          <div class="container">
             <p class="formlinks"><%= link_to content.name, user_creature_path(content.user, content) %></p>
@@ -141,7 +136,7 @@
    <% end %>
    <% if newestContent("Item").count > 0 %>
       <br>
-      <p>Newest Items</p>
+      <h2 class="subheader1">Newest Items</h2>
       <% newestContent("Item").each_with_index do |content, index| %>
          <div class="container">
             <p class="formlinks"><%= link_to content.name, user_item_path(content.user, content) %></p>
@@ -166,7 +161,7 @@
    <% end %>
    <% if newestContent("OC").count > 0 %>
       <br>
-      <p>Newest OCs</p>
+      <h2 class="subheader1">Newest OCs</h2>
       <% newestContent("OC").each_with_index do |content, index| %>
          <div class="container">
             <p class="formlinks"><%= link_to content.name, user_oc_path(content.user, content) %></p>
