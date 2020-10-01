@@ -7,7 +7,7 @@ module UserinfosHelper
             value = params[:id]
          elsif(type == "Userinfo")
             value = params.require(:userinfo).permit(:avatar, :remote_avatar_url, :avatar_cache, :miniavatar,
-            :remote_miniavatar_url, :miniavatar_cache, :ogg, :remote_ogg_url, :ogg_cache, :info, :daycolor_id, :nightcolor_id, :bookgroup_id, :audiobrowser, :videobrowser)
+            :remote_miniavatar_url, :miniavatar_cache, :ogg, :remote_ogg_url, :ogg_cache, :info, :daycolor_id, :nightcolor_id, :bookgroup_id, :audiobrowser, :videobrowser, :nightvision, :militarytime)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -22,12 +22,16 @@ module UserinfosHelper
             logged_in = current_user
             if(logged_in && ((logged_in.id == infoFound.user_id) || logged_in.pouch.privilege == "Admin"))
                @userinfo = infoFound
+               #Set up different colors for night and day selections
                allColors = Colorscheme.all
                activatedColors = allColors.select{|colorscheme| colorscheme.activated || ((colorscheme.user_id == logged_in.id) || logged_in.privilege == "Admin")}
+               nightcolors = activatedColors.select{|colorscheme| colorscheme.nightcolor == true}
+               daycolors = activatedColors.select{|colorscheme| colorscheme.nightcolor == false}
                allGroups = Bookgroup.order("created_on desc")
                allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                @group = allowedGroups
-               @colorschemes = activatedColors
+               @nightcolors = nightcolors
+               @daycolors = daycolors
                if(type == "update")
                   if(@userinfo.update_attributes(getInfoParams("Userinfo")))
                      flash[:success] = "Userinfo for #{@userinfo.user.vname} was successfully updated."

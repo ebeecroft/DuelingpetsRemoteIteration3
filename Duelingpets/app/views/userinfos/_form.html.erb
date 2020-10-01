@@ -59,16 +59,27 @@
     <%= form.hidden_field :mp3_cache %>
   </div>
   <br>
-  <div class="pageformat">
-    <%= form.label :daycolor_id, "Day colorscheme" %>
-    <%= form.collection_select(:daycolor_id, @colorschemes, :id, :name) %>
-  </div>
-  <br>
-  <div class="pageformat">
-    <%= form.label :nightcolor_id, "Night colorscheme" %>
-    <%= form.collection_select(:nightcolor_id, @colorschemes, :id, :name) %>
-  </div>
-  <br>
+  <% if @daycolors.count > 0 && @nightcolors.count > 0 %>
+     <div class="pageformat">
+        <%= form.label :nightvision %>
+        <%= form.check_box :nightvision %>
+     </div>
+     <br>
+  <% end %>
+  <% if @daycolors.count > 0 %>
+     <div class="pageformat">
+        <%= form.label :daycolor_id, "Day colorscheme" %>
+        <%= form.collection_select(:daycolor_id, @daycolors, :id, :name) %>
+     </div>
+     <br>
+  <% end %>
+  <% if @nightcolors.count > 0 %>
+     <div class="pageformat">
+        <%= form.label :nightcolor_id, "Night colorscheme" %>
+        <%= form.collection_select(:nightcolor_id, @nightcolors, :id, :name) %>
+     </div>
+     <br>
+  <% end %>
   <div class="pageformat">
     <%= form.label :militarytime %>
     <%= form.check_box :militarytime %>

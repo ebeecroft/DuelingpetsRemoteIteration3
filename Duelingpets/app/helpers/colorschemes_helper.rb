@@ -5,16 +5,19 @@ module ColorschemesHelper
          value = ""
          if(type == "User")
             value = params[:user_id]
+         elsif(type == "ColorId")
+            value = params[:color_id]
          elsif(type == "Colorscheme")
-            value = params.require(:colorscheme).permit(:name, :description, :activated, :backgroundcolor, 
+            #Remove activate from edit eventually
+            value = params.require(:colorscheme).permit(:name, :description, :nightcolor, :backgroundcolor, 
             :headercolor, :subheader1color, :subheader2color, :subheader3color, :textcolor,
-            :defaultbuttoncolor, :defaultbuttonbackgcolor, :editbuttoncolor, :editbuttonbackgcolor,
+            :editbuttoncolor, :editbuttonbackgcolor,
             :destroybuttoncolor, :destroybuttonbackgcolor, :submitbuttoncolor, :submitbuttonbackgcolor,
             :navigationcolor, :navigationlinkcolor, :navigationhovercolor, :navigationhoverbackgcolor,
-            :onlinestatuscolor, :profilecolor, :profilevisitedcolor, :profilehovercolor,
+            :onlinestatuscolor, :profilecolor, :profilehovercolor,
             :profilehoverbackgcolor, :sessioncolor, :navlinkcolor, :navlinkhovercolor,
             :navlinkhoverbackgcolor, :explanationborder, :explanationbackgcolor, :explanheadercolor,
-            :explanheaderbackgcolor, :errorfieldcolor, :errorcolor, :warningcolor, :notificationcolor,
+            :explantextcolor, :errorfieldcolor, :errorcolor, :warningcolor, :notificationcolor,
             :successcolor)
          elsif(type == "Page")
             value = params[:page]
@@ -142,6 +145,29 @@ module ColorschemesHelper
             @userinfo.save
             flash[:success] = "#{logged_in.vname}'s color was set back to the default!"
             redirect_to user_path(logged_in)
+         else
+            redirect_to root_path
+         end
+      end
+
+      def activateCommons
+         logged_in = current_user
+         colorFound = Colorscheme.find_by_id(getColorParams("ColorId"))
+         if(logged_in && colorFound && (logged_in.pouch.privilege == "Admin" || logged_in.id == colorFound.user_id))
+            if(colorFound.activated)
+               colorFound.activated = false
+            else
+               colorFound.activated = true
+            end
+            @colorFound = colorFound
+            @colorFound.save
+            if(logged_in.pouch.privilege == "Admin")
+               redirect_to colorschemes_list_path
+            else
+               redirect_to colorschemes_path
+            end
+         else
+            redirect_to root_path
          end
       end
 
@@ -260,6 +286,22 @@ module ColorschemesHelper
                   end
                else
                   undoCommons
+               end
+            elsif(type == "activatecolor")
+               allMode = Maintenancemode.find_by_id(1)
+               userMode = Maintenancemode.find_by_id(6)
+               if(allMode.maintenance_on || userMode.maintenance_on)
+                  if(current_user && current_user.pouch.privilege == "Admin")
+                     activateCommons
+                  else
+                     if(allMode.maintenance_on)
+                        render "/start/maintenance"
+                     else
+                        render "/users/maintenance"
+                     end
+                  end
+               else
+                  activateCommons
                end
             end
          end

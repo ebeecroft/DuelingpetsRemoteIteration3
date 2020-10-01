@@ -5,6 +5,7 @@ class CreateUserinfos < ActiveRecord::Migration[5.2]
       t.string :miniavatar
       t.string :mp3
       t.string :ogg
+      t.boolean :nightvision, default: false
       t.boolean :music_on, default: false
       t.boolean :mute_on, default: false
       t.string :audiobrowser, default: "ogg"

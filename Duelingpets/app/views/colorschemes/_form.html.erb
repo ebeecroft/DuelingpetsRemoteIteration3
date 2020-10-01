@@ -1,14 +1,15 @@
 <%= form_with(model: [@user, @colorscheme], local: true) do |form| %>
   <% if @colorscheme.errors.any? %>
-    <div id="errorexplan">
-      <h2 id="errorheader"><%= pluralize(@colorscheme.errors.count, "error") %> prohibited this colorscheme from being saved:</h2>
-
-      <ul>
-      <% @colorscheme.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+     <div class="alignboxes">
+        <div id="errorexplan">
+           <h2 id="errorheader"><%= pluralize(@colorscheme.errors.count, "error") %> prohibited this colorscheme from being saved:</h2>
+           <ul>
+              <% @colorscheme.errors.full_messages.each do |message| %>
+                 <li class="explantext"><%= message %></li>
+              <% end %>
+           </ul>
+        </div>
+     </div>
   <% end %>
   <div class="pageformat">
     <%= form.label :name %>
@@ -21,8 +22,8 @@
   </div>
   <br>
   <div class="pageformat">
-    <%= form.label :activated %>
-    <%= form.check_box :activated %>
+    <%= form.label :nightcolor %>
+    <%= form.check_box :nightcolor %>
   </div>
   <br>
   <div class="pageformat">
@@ -53,16 +54,6 @@
   <div class="pageformat">
     <%= form.label :textcolor %>
     <%= form.text_field :textcolor %>
-  </div>
-  <br>
-  <div class="pageformat">
-    <%= form.label :defaultbuttoncolor %>
-    <%= form.text_field :defaultbuttoncolor %>
-  </div>
-  <br>
-  <div class="pageformat">
-    <%= form.label :defaultbuttonbackgcolor %>
-    <%= form.text_field :defaultbuttonbackgcolor %>
   </div>
   <br>
   <div class="pageformat">
@@ -126,11 +117,6 @@
   </div>
   <br>
   <div class="pageformat">
-    <%= form.label :profilevisitedcolor %>
-    <%= form.text_field :profilevisitedcolor %>
-  </div>
-  <br>
-  <div class="pageformat">
     <%= form.label :profilehovercolor %>
     <%= form.text_field :profilehovercolor %>
   </div>
@@ -174,10 +160,9 @@
     <%= form.label :explanheadercolor %>
     <%= form.text_field :explanheadercolor %>
   </div>
-  <br>
   <div class="pageformat">
-    <%= form.label :explanheaderbackgcolor %>
-    <%= form.text_field :explanheaderbackgcolor %>
+    <%= form.label :explantextcolor %>
+    <%= form.text_field :explantextcolor %>
   </div>
   <br>
   <div class="pageformat">

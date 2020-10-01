@@ -24,7 +24,6 @@ class Colorscheme < ApplicationRecord
    validates :navigationhoverbackgcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :onlinestatuscolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :profilecolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
-   validates :profilevisitedcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :profilehovercolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :profilehoverbackgcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :sessioncolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
@@ -34,14 +33,12 @@ class Colorscheme < ApplicationRecord
    validates :explanationborder, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :explanationbackgcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :explanheadercolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
-   validates :explanheaderbackgcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
+   validates :explantextcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :errorfieldcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :errorcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :warningcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :notificationcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :successcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
-   validates :defaultbuttoncolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
-   validates :defaultbuttonbackgcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :editbuttoncolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :editbuttonbackgcolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}
    validates :destroybuttoncolor, presence: true, length: {is: 7}, format: {with: VALID_COLOR_REGEX}

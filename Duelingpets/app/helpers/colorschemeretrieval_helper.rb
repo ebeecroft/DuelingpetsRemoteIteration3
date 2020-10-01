@@ -4,7 +4,20 @@ module ColorschemeretrievalHelper
       def getColorAttribute(attribute)
          value = ""
          if(current_user)
-            usercolor = Colorscheme.find_by_id(current_user.userinfo.daycolor_id)
+            #Eventually switch to choice night or day
+            if(current_user.userinfo.nightvision)
+               if(!current_user.userinfo.nightcolor_id.nil?)
+                  usercolor = Colorscheme.find_by_id(current_user.userinfo.nightcolor_id)
+               else
+                  usercolor = Colorscheme.find_by_id(current_user.userinfo.daycolor_id)
+               end
+            else
+               if(!current_user.userinfo.daycolor_id.nil?)
+                  usercolor = Colorscheme.find_by_id(current_user.userinfo.daycolor_id)
+               else
+                  usercolor = Colorscheme.find_by_id(current_user.userinfo.nightcolor_id)
+               end
+            end
             if(attribute == "Backgroundcolor")
                value = usercolor.backgroundcolor
             elsif(attribute == "Header")
@@ -39,8 +52,6 @@ module ColorschemeretrievalHelper
                value = usercolor.navigationhovercolor
             elsif(attribute == "Navigationhoverbackgc")
                value = usercolor.navigationhoverbackgcolor
-            elsif(attribute == "Profilevisited")
-               value = usercolor.profilevisitedcolor
             elsif(attribute == "Profilehovercolor")
                value = usercolor.profilehovercolor
             elsif(attribute == "Profilehoverbackgc")
@@ -57,14 +68,10 @@ module ColorschemeretrievalHelper
                value = usercolor.explanationbackgcolor
             elsif(attribute == "Explanheadercolor")
                value = usercolor.explanheadercolor
-            elsif(attribute == "Explanheaderbackgc")
-               value = usercolor.explanheaderbackgcolor
+            elsif(attribute == "Explantextcolor")
+               value = usercolor.explantextcolor
             elsif(attribute == "Errorfieldcolor")
                value = usercolor.errorfieldcolor
-            elsif(attribute == "Defaultbuttoncolor")
-               value = usercolor.defaultbuttoncolor
-            elsif(attribute == "Defaultbuttonbackgc")
-               value = usercolor.defaultbuttonbackgcolor
             elsif(attribute == "Editbuttoncolor")
                value = usercolor.editbuttoncolor
             elsif(attribute == "Editbuttonbackgc")
@@ -112,8 +119,6 @@ module ColorschemeretrievalHelper
                value = default.navigationhovercolor
             elsif(attribute == "Navigationhoverbackgc")
                value = default.navigationhoverbackgcolor
-            elsif(attribute == "Profilevisited")
-               value = default.profilevisitedcolor
             elsif(attribute == "Profilehovercolor")
                value = default.profilehovercolor
             elsif(attribute == "Profilehoverbackgc")

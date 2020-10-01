@@ -32,4 +32,8 @@ class ColorschemesController < ApplicationController
    def undo
       mode "undo"
    end
+
+   def activatecolor
+      mode "activatecolor"
+   end
 end

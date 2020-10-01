@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.datetime "updated_on"
     t.integer "user_id"
     t.boolean "activated", default: false
+    t.boolean "nightcolor", default: false
     t.boolean "democolor", default: false
     t.string "backgroundcolor", default: "#000000"
     t.string "headercolor", default: "#000000"
@@ -216,8 +217,6 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.string "subheader2color", default: "#000000"
     t.string "subheader3color", default: "#000000"
     t.string "textcolor", default: "#000000"
-    t.string "defaultbuttoncolor", default: "#000000"
-    t.string "defaultbuttonbackgcolor", default: "#000000"
     t.string "editbuttoncolor", default: "#000000"
     t.string "editbuttonbackgcolor", default: "#000000"
     t.string "destroybuttoncolor", default: "#000000"
@@ -230,7 +229,6 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.string "navigationhoverbackgcolor", default: "#000000"
     t.string "onlinestatuscolor", default: "#000000"
     t.string "profilecolor", default: "#000000"
-    t.string "profilevisitedcolor", default: "#000000"
     t.string "profilehovercolor", default: "#000000"
     t.string "profilehoverbackgcolor", default: "#000000"
     t.string "sessioncolor", default: "#000000"
@@ -240,7 +238,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.string "explanationborder", default: "#000000"
     t.string "explanationbackgcolor", default: "#000000"
     t.string "explanheadercolor", default: "#000000"
-    t.string "explanheaderbackgcolor", default: "#000000"
+    t.string "explantextcolor", default: "#000000"
     t.string "errorfieldcolor", default: "#000000"
     t.string "errorcolor", default: "#000000"
     t.string "warningcolor", default: "#000000"
@@ -1071,6 +1069,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.string "miniavatar"
     t.string "mp3"
     t.string "ogg"
+    t.boolean "nightvision", default: false
     t.boolean "music_on", default: false
     t.boolean "mute_on", default: false
     t.string "audiobrowser", default: "ogg"
