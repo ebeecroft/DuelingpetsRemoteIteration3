@@ -117,7 +117,7 @@
    <%= render 'showform' %>
    <% if current_user %>
       <br>
-      <p>Shoutbox section</p>
+      <h2 class="subheader1">Shoutbox section</h2>
       <!--What is the difference between page shouts and shout? -->
       <p><%= button_to 'Review', shouts_review_path, method: :get, class: "button submitbutton" %></p>
       <p>Capacity: <%= getUserContent(@user, "Shout") %>/<%= @user.shoutbox.capacity %></p>

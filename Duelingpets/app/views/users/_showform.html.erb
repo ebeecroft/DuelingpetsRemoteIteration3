@@ -1,7 +1,7 @@
 <% if current_user %>
    <% if @user.donationbox.to_s != "" %>
       <br>
-      <p>Donationbox section</p>
+      <h2 class="subheader1">Donationbox section</h2>
       <p>Capacity: <%= getUserContent(@user, "Donors") %>/<%= @user.donationbox.capacity %></p>
       <p>Box open: <%= @user.donationbox.box_open %></p>
       <% if(@user.donationbox.box_open) %>
@@ -30,7 +30,7 @@
       <% end %>
    <% end %>
    <br>
-   <p>PMbox section</p>
+   <h2 class="subheader1">PMbox section</h2>
    <p>Capacity: <%= getUserContent(@user, "PMs") %>/<%= @user.pmbox.capacity %></p>
    <p>Box open: <%= @user.pmbox.box_open %></p>
    <% if(@user.pmbox.box_open) %>
@@ -54,16 +54,11 @@
          <p><%= button_to 'Enable PMbox', users_disablepmbox_path(:id=>@user.id), method: :post, class: "button submitbutton" %></p>
       <% end %>
    <% end %>
-   <% if current_user.id == @user.id %>
-      <br>
-      <p>Open Inventory</p>
-      <p><%= button_to "Inventory", user_inventory_path(@user, @user.inventory), method: :get, class: "button submitbutton" %></p>
-   <% end %>
 <% end %>
 <!--Partner section--->
 <% if getUserContent(@user, "Partners") != 0 %>
    <br>
-   <p>Partner section</p>
+   <h2 class="subheader1">Partner section</h2>
    <div class="container"><%= button_to "My Partners", user_partners_path(@user), method: :get, class: "button submitbutton" %></div>
    <br>
    <p>Partner limit: <%= @user.partners.count %>/<%#= getUpgrades("Partner", "Limit", @user.pouch, 10) %></p>
@@ -72,7 +67,7 @@
 <!--Gallery section--->
 <% if getUserContent(@user, "Galleries") != 0 %>
    <br>
-   <p>Gallery section</p>
+   <h2 class="subheader1">Gallery section</h2>
    <div class="container"><%= button_to "My Galleries", user_galleries_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id && getUpgrades("Gallery", "Limit", @user.pouch, 9) > 0 %>
       <div class="container"><%= button_to "New Gallery", new_user_gallery_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -82,7 +77,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("Gallery", "Limit", @user.pouch, 9) > 0 %>
       <br>
-      <p>Gallery section</p>
+      <h2 class="subheader1">Gallery section</h2>
       <p><%= button_to "New Gallery", new_user_gallery_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -90,7 +85,7 @@
 <!--Channel section--->
 <% if getUserContent(@user, "Channels") != 0 %>
    <br>
-   <p>Channel section</p>
+   <h2 class="subheader1">Channel section</h2>
    <div class="container"><%= button_to "My Channels", user_channels_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id && getUpgrades("Channel", "Limit", @user.pouch, 8) > 0 %>
       <div class="container"><%= button_to "New Channel", new_user_channel_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -100,7 +95,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("Channel", "Limit", @user.pouch, 8) > 0 %>
       <br>
-      <p>Channel section</p>
+      <h2 class="subheader1">Channel section</h2>
       <p><%= button_to "New Channel", new_user_channel_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -108,7 +103,7 @@
 <!--Bookworld section--->
 <% if getUserContent(@user, "Bookworlds") != 0 %>
    <br>
-   <p>Bookworld section</p>
+   <h2 class="subheader1">Bookworld section</h2>
    <div class="container"><%= button_to "My Bookworlds", user_bookworlds_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id && getUpgrades("Book", "Limit", @user.pouch, 7) > 0 %>
       <div class="container"><%= button_to "New Bookworld", new_user_bookworld_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -118,7 +113,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("Book", "Limit", @user.pouch, 7) > 0 %>
       <br>
-      <p>Bookworld section</p>
+      <h2 class="subheader1">Bookworld section</h2>
       <p><%= button_to "New Bookworld", new_user_bookworld_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -126,7 +121,7 @@
 <!--Jukebox section--->
 <% if getUserContent(@user, "Jukeboxes") != 0 %>
    <br>
-   <p>Jukebox section</p>
+   <h2 class="subheader1">Jukebox section</h2>
    <div class="container"><%= button_to "My Jukeboxes", user_jukeboxes_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id && getUpgrades("Jukebox", "Limit", @user.pouch, 6) > 0 %>
       <div class="container"><%= button_to "New Jukebox", new_user_jukebox_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -136,7 +131,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("Jukebox", "Limit", @user.pouch, 6) > 0 %>
       <br>
-      <p>Jukebox section</p>
+      <h2 class="subheader1">Jukebox section</h2>
       <p><%= button_to "New Jukebox", new_user_jukebox_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -144,7 +139,7 @@
 <!--OC section--->
 <% if getUserContent(@user, "OCs") != 0 %>
    <br>
-   <p>OC section</p>
+   <h2 class="subheader1">OC section</h2>
    <div class="container"><%= button_to "My OCs", user_ocs_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id && getUpgrades("OC", "Limit", @user.pouch, 5) > 0 %>
       <div class="container"><%= button_to "New OC", new_user_oc_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -154,7 +149,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("OC", "Limit", @user.pouch, 5) > 0 %>
       <br>
-      <p>OC section</p>
+      <h2 class="subheader1">OC section</h2>
       <p><%= button_to "New OC", new_user_oc_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -162,7 +157,7 @@
 <!--Item section--->
 <% if getUserContent(@user, "Items") != 0 %>
    <br>
-   <p>Item section</p>
+   <h2 class="subheader1">Item section</h2>
    <div class="container"><%= button_to "My Items", user_items_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id %>
       <div class="container"><%= button_to "New Item", items_choose_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -171,7 +166,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id %>
       <br>
-      <p>Item section</p>
+      <h2 class="subheader1">Item section</h2>
       <p><%= button_to "New Item", items_choose_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -179,7 +174,7 @@
 <!--Creature section--->
 <% if getUserContent(@user, "Creatures") != 0 %>
    <br>
-   <p>Creature section</p>
+   <h2 class="subheader1">Creature section</h2>
    <div class="container"><%= button_to "My Creatures", user_creatures_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id %>
       <div class="container"><%= button_to "New Creature", new_user_creature_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -188,7 +183,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id %>
       <br>
-      <p>Creature section</p>
+      <h2 class="subheader1">Creature section</h2>
       <p><%= button_to "New Creature", new_user_creature_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -196,7 +191,7 @@
 <!--Blog section--->
 <% if getUserContent(@user, "Blog") != 0 || getUserContent(@user, "Adblog") != 0 %>
    <br>
-   <p>Blog section</p>
+   <h2 class="subheader1">Blog section</h2>
    <div class="container"><%= button_to "My Blog", user_blogs_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id && getUpgrades("Blog", "Limit", @user.pouch, 3) > 0 %>
       <div class="container"><%= button_to "New Blog", new_user_blog_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -208,7 +203,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("Blog", "Limit", @user.pouch, 3) > 0 %>
       <br>
-      <p>Blog section</p>
+      <h2 class="subheader1">Blog section</h2>
       <p><%= button_to "New Blog", new_user_blog_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>
@@ -216,7 +211,7 @@
 <!--Colorscheme section--->
 <% if getUserContent(@user, "Activatedcolors") != 0 || getUserContent(@user, "Inactivecolors") != 0 %>
    <br>
-   <p>Colorscheme section</p>
+   <h2 class="subheader1">Colorscheme section</h2>
    <div class="container"><%= button_to "My Colorscheme", user_colorschemes_path(@user), method: :get, class: "button submitbutton" %></div>
    <% if current_user && current_user.id == @user.id %>
       <div class="container"><%= button_to "New Colorscheme", new_user_colorscheme_path(@user), method: :get, class: "button submitbutton" %></div>
@@ -227,7 +222,7 @@
 <% else %>
    <% if current_user && current_user.id == @user.id %>
       <br>
-      <p>Colorscheme section</p>
+      <h2 class="subheader1">Colorscheme section</h2>
       <p><%= button_to "New Colorscheme", new_user_colorscheme_path(@user), method: :get, class: "button submitbutton" %></p>
    <% end %>
 <% end %>

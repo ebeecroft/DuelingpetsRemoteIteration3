@@ -1,19 +1,21 @@
 <%= form_with(model: @artpage, local: true) do |form| %>
   <% if @artpage.errors.any? %>
-    <div id="errorexplan">
-      <h2 id="errorheader"><%= pluralize(@artpage.errors.count, "error") %> prohibited this artpage from being saved:</h2>
-
-      <ul>
-      <% @artpage.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+     <div class="alignboxes">
+        <div id="errorexplan">
+           <h2 id="errorheader"><%= pluralize(@artpage.errors.count, "error") %> prohibited this artpage from being saved:</h2>
+           <ul>
+              <% @artpage.errors.full_messages.each do |message| %>
+                 <li class="explantext"><%= message %></li>
+              <% end %>
+           </ul>
+        </div>
+     </div>
   <% end %>
   <div class="pageformat">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :message %>
     <%= form.text_area :message %>

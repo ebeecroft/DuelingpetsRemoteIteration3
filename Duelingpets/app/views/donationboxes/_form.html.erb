@@ -1,23 +1,26 @@
 <%= form_with(model: [@user, @donationbox], local: true) do |form| %>
   <% if @donationbox.errors.any? %>
-    <div id="errorexplan">
-      <h2 id="errorheader"><%= pluralize(@donationbox.errors.count, "error") %> prohibited this donationbox from being saved:</h2>
-
-      <ul>
-      <% @donationbox.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+     <div class="alignboxes">
+        <div id="errorexplan">
+           <h2 id="errorheader"><%= pluralize(@donationbox.errors.count, "error") %> prohibited this donationbox from being saved:</h2>
+           <ul>
+              <% @donationbox.errors.full_messages.each do |message| %>
+                 <li class="explantext"><%= message %></li>
+              <% end %>
+           </ul>
+        </div>
+     </div>
   <% end %>
   <div class="pageformat">
     <%= form.label :goal, "Points goal" %>
     <%= form.number_field :goal %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :box_open, "Activate donations" %>
     <%= form.check_box :box_open %>
   </div>
+  <br>
   <div class="pageformat">
     <%= form.label :description %>
     <%= form.text_area :description %>

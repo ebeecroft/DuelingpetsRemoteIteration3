@@ -1,14 +1,15 @@
 <%= form_with(model: [@inventory, @inventoryslot], local: true) do |form| %>
   <% if @inventoryslot.errors.any? %>
-    <div id="errorexplan">
-      <h2 id="errorheader"><%= pluralize(@inventoryslot.errors.count, "error") %> prohibited this inventoryslot from being saved:</h2>
-
-      <ul>
-      <% @inventoryslot.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+     <div class="alignboxes">
+        <div id="errorexplan">
+           <h2 id="errorheader"><%= pluralize(@inventoryslot.errors.count, "error") %> prohibited this inventoryslot from being saved:</h2>
+           <ul>
+              <% @inventoryslot.errors.full_messages.each do |message| %>
+                 <li class="explantext"><%= message %></li>
+              <% end %>
+           </ul>
+        </div>
+     </div>
   <% end %>
   <div class="pageformat">
     <%= form.label :name %>
