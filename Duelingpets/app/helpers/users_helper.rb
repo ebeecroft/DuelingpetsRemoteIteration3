@@ -38,8 +38,8 @@ module UsersHelper
             end
             value = activatedColors.count
          elsif(type == "Shout" || type == "Pageshouts")
-            allShouts = user.shoutbox.shouts.order("created_on desc")
-            reviewedShouts = allShouts.select{|shout| shout.reviewed}
+            allShouts = Shout.order("created_on desc")
+            reviewedShouts = allShouts.select{|shout| shout.shoutbox_id == user.shoutbox.id && shout.reviewed}
             value = reviewedShouts.count
             if(type == "Pageshouts")
               #Shouts that get displayed on the user's show view
@@ -59,9 +59,7 @@ module UsersHelper
             reviewedOCs = allOCs.select{|oc| oc.reviewed}
             value = reviewedOCs.count
          elsif(type == "Donors")
-            allDonors = Donor.order("created_on desc")
-            donors = allDonors.select{|donor| donor.donationbox_id == user.donationbox.id && !donor.pointsreceived}
-            value = donors.sum{|donor| donor.amount}
+            value = user.donationbox.progress
          elsif(type == "Galleries")
             allGalleries = user.galleries.order("created_on desc")
             value = allGalleries.count
@@ -75,8 +73,9 @@ module UsersHelper
             allBooks = user.books.order("created_on desc")
             value = allBooks.count
          elsif(type == "PMs")
-            allPMs = user.pms.order("created_on desc")
-            value = allPMs.count
+            allPMs = Pm.order("created_on desc")
+            pms = allPMs.select{|pm| pm.pmbox.user_id == user.id}
+            value = pms.count
          end
          return value
       end

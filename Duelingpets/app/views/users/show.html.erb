@@ -40,7 +40,7 @@
          <p>Shared: <%= @user.shared %></p>
          <p>Pouch: <%= @user.pouch.amount %>/<%= getUpgrades("Pouch", "Limit", @user.pouch, 1) %> points</p>
          <p>
-         <div class="container">Dreyterrium: <%= @user.pouch.dreyterriumamount %>/<%= getUpgrades("Dreyterrium", "Limit", @user.pouch, 4) %></div> <div class="container"><%= button_to 'Extract', users_extractore_path(:id=>@user.id), method: :post, class: "button submitbutton" %></div>
+         <div class="container">Dreyterrium: <%= @user.pouch.dreyterriumamount %>/<%= getUpgrades("Dreyore", "Limit", @user.pouch, 5) %></div> <div class="container"><%= button_to 'Extract', users_extractore_path(:id=>@user.id), method: :post, class: "button submitbutton" %></div>
          </p>
          <% if getUpgrades("Emerald", "Limit", @user.pouch, 2) > 0 %>
             <p>Emeralds: <%= @user.pouch.emeraldamount %>/<%= getUpgrades("Emerald", "Limit", @user.pouch, 2) %></p>

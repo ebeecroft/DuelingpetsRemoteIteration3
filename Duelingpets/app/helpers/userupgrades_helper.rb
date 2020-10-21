@@ -68,7 +68,7 @@ module UserupgradesHelper
                pouch.pouchslot.free2 += 1
                level = pouch.pouchslot.free2
             end
-         elsif(buytype == "Dreyterrium")
+         elsif(buytype == "Dreyore")
             level = pouch.pouchslot.free5
             if(upgradetype == "Purchase")
                pouch.pouchslot.free5 += 1
@@ -143,8 +143,6 @@ module UserupgradesHelper
                   newUpgrade = Userupgrade.new
                   if(type == "create")
                      newUpgrade = Userupgrade.new(getUpgradeParams("Upgrade"))
-                     newUpgrade.created_on = currentTime
-                     newUpgrade.updated_on = currentTime
                   end
                   @userupgrade = newUpgrade
 
@@ -161,7 +159,6 @@ module UserupgradesHelper
                if(current_user && current_user.pouch.privilege == "Admin")
                   upgradeFound = Userupgrade.find_by_id(getUpgradeParams("Id"))
                   if(upgradeFound)
-                     upgradeFound.updated_on = currentTime
                      @userupgrade = upgradeFound
                      if(type == "update")
                         if(@userupgrade.update_attributes(getUpgradeParams("Upgrade")))

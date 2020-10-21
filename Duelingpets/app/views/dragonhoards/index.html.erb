@@ -38,7 +38,7 @@
          <p>Treasury: <%= @dragonhoard.treasury %></p>
          <% if current_user %>
             <div class="container">Emeralds: <%= @dragonhoard.emeralds %></div>
-            <% if @dragonhoard.emeralds.count > 0 %>
+            <% if @dragonhoard.emeralds > 0 %>
                <div class="container"><%= button_to "Buy Emeralds for " + getEmeraldPrice("Buy").to_s, dragonhoards_buyemeralds_path(:dragonhoard_id=>@dragonhoard.id), method: :post, class: "button submitbutton" %></div>
                <br>
             <% end %>

@@ -1,6 +1,298 @@
 module StartHelper
 
    private
+      def staff
+         value = false
+         if(((current_user.pouch.privilege == "Keymaster") || (current_user.pouch.privilege == "Reviewer")) || (current_user.pouch.privilege == "Admin"))
+            value = true
+         end
+         return value
+      end
+
+      def boxstatus(type)
+         status = ""
+         if(type == "Donationbox")
+            if(current_user.donationbox.box_open)
+               status = "Open"
+            else
+               status = "Closed"
+            end
+         elsif(type == "Shoutbox")
+            if(current_user.shoutbox.box_open)
+               status = "Open"
+            else
+               status = "Closed"
+            end
+         elsif(type == "PMbox")
+            if(current_user.pmbox.box_open)
+               status = "Open"
+            else
+               status = "Closed"
+            end
+         end
+         return status
+      end
+
+      def alert(type)
+         value = 0
+         if(type != "All")
+            if(alertMessages(type, "Number") != 0)
+               value += 1
+            end
+         else
+            if(alertMessages("Pouch", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Emerald", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Blog", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("OC", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Dreyore", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Jukebox", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Book", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Channel", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Gallery", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Shoutbox", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("PMbox", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Donationbox", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Partner", "Number") != 0)
+               value += 1
+            end
+            if(alertMessages("Item", "Number") != 0)
+               value += 1
+            end
+         end
+         return value
+      end
+
+      def alertMessages(type, valueType)
+         alert = 0
+         capacity = 0
+         amount = 0
+
+         #Determines the message to display
+         if(type == "Pouch")
+            capacity = getUpgrades("Pouch", "Limit", current_user.pouch, 1)
+            amount = current_user.pouch.amount
+         elsif(type == "Emerald")
+            capacity = getUpgrades("Emerald", "Limit", current_user.pouch, 2)
+            amount = current_user.pouch.emeraldamount
+         elsif(type == "Blog")
+            capacity = getUpgrades("Blog", "Limit", current_user.pouch, 3)
+            amount = current_user.blogs.count
+         elsif(type == "OC")
+            capacity = getUpgrades("OC", "Limit", current_user.pouch, 4)
+            amount = current_user.ocs.count
+         elsif(type == "Dreyore")
+            capacity = getUpgrades("Dreyore", "Limit", current_user.pouch, 5)
+            amount = current_user.pouch.dreyterriumamount
+         elsif(type == "Jukebox")
+            capacity = getUpgrades("Jukebox", "Limit", current_user.pouch, 6)
+            amount = current_user.jukeboxes.count
+         elsif(type == "Book")
+            capacity = getUpgrades("Book", "Limit", current_user.pouch, 7)
+            amount = current_user.books.count
+         elsif(type == "Channel")
+            capacity = getUpgrades("Channel", "Limit", current_user.pouch, 8)
+            amount = current_user.channels.count
+         elsif(type == "Gallery")
+            capacity = getUpgrades("Gallery", "Limit", current_user.pouch, 9)
+            amount = current_user.galleries.count
+            #End of traditional content
+         elsif(type == "Shoutbox")
+            capacity = current_user.shoutbox.capacity
+            allShouts = Shout.all
+            shouts = allShouts.select{|shout| shout.shoutbox_id == current_user.shoutbox.id}
+            amount = shouts.count
+         elsif(type == "PMbox")
+            capacity = current_user.pmbox.capacity
+            allPMs = Pm.all
+            pms = allPMs.select{|pm| pm.pmbox_id == current_user.pmbox.id}
+            amount = pms.count
+         elsif(type == "Donationbox")
+            capacity = current_user.donationbox.capacity
+            amount = current_user.donationbox.progress
+         elsif(type == "Partner")
+            capacity = current_user.inventory.petcapacity
+            amount = current_user.partners.count
+         elsif(type == "Item")
+            capacity = current_user.inventory.capacity
+            amount = current_user.inventory.inventoryslots.count
+         end
+
+         #Decides on whether to pass back a string or a number
+         if(valueType == "Name")
+            if(capacity != 0 && capacity - amount >= 0)
+               if(amount == capacity)
+                  alert = "Full capacity"
+               elsif(capacity - amount <= 4 && amount > 0)
+                  alert = "Limited capacity"
+               elsif((capacity >= 20 && amount > 0) && ((capacity - amount) <= (capacity * 0.25)))
+                  alert = "Quarter capacity"
+               end
+            elsif(capacity == 0)
+               alert = "N/A"
+            else
+               alert = "Overflow, please delete some!"
+            end   
+         else
+            if(capacity != 0 && capacity - amount >= 0)
+               if(amount == capacity)
+                  alert = 1
+               elsif(capacity - amount <= 4 && amount > 0)
+                  alert = 2
+               elsif((capacity >= 20 && amount > 0) && ((capacity - amount) <= (capacity * 0.25)))
+                  alert = 3
+               end
+            elsif(capacity == 0)
+               alert = 0
+            else
+               alert = -1
+            end
+         end
+         return alert
+      end
+
+      def notify(type)
+         #Determines the content that will be chosen
+         if(type == "Blog")
+            allContents = Blog.all
+         elsif(type == "OC")
+            allContents = Oc.all
+         elsif(type == "Item")
+            allContents = Item.all
+         elsif(type == "Creature")
+            allContents = Creature.all
+         elsif(type == "Art")
+            allContents = Art.all
+         elsif(type == "Sound")
+            allContents = Sound.all
+         elsif(type == "Movie")
+            allContents = Movie.all
+         elsif(type == "Chapter")
+            allContents = Chapter.all
+         elsif(type == "Registration")
+            allContents = Registration.all
+         elsif(type == "Colorscheme")
+            allContents = Colorscheme.all
+         elsif(type == "Shout")
+            allContents = Shout.all
+         elsif(type == "PM")
+            allContents = Pm.all
+         elsif(type == "Partner")
+            allContents = Partner.all
+         end
+      end   
+
+      def getNotifications(type)
+         allContents = ""
+         if(type != "All")
+            allContents = notify(type)
+         end
+
+         #Determines which value system to use
+         if(type == "Registration")
+            contents = allContents
+            value = contents.count
+         elsif(type == "Colorscheme")
+            contents = allContents.select{|content| !content.activated && content.user_id == current_user.id}
+            value = contents.count
+         elsif(type == "Shout")
+            contents = allContents.select{|content| !content.reviewed && content.shoutbox_id == current_user.shoutbox.id}
+            value = contents.count
+         elsif(type == "PM")
+            contents = allContents.select{|content| (content.user_id == current_user.id && content.user1_unread) || (content.pmbox.user_id == current_user.id && content.user2_unread)}
+            value = contents.count
+         elsif(type == "Partner")
+            contents = allContents.select{|content| content.inbattle && content.user_id == current_user.id}
+            value = contents.count
+         elsif(type == "All")
+            noteCount = 0
+            if(staff)
+               allContents = notify("Blog")
+               blogs = allContents.select{|content| !content.reviewed}
+               noteCount += blogs.count
+
+               allContents = notify("OC")
+               ocs = allContents.select{|content| !content.reviewed}
+               noteCount += ocs.count
+
+               allContents = notify("Item")
+               items = allContents.select{|content| !content.reviewed}
+               noteCount += items.count
+
+               allContents = notify("Creature")
+               creatures = allContents.select{|content| !content.reviewed}
+               noteCount += creatures.count
+
+               allContents = notify("Art")
+               arts = allContents.select{|content| !content.reviewed}
+               noteCount += arts.count
+
+               allContents = notify("Sound")
+               sounds = allContents.select{|content| !content.reviewed}
+               noteCount += sounds.count
+
+               allContents = notify("Movie")
+               movies = allContents.select{|content| !content.reviewed}
+               noteCount += movies.count
+
+               allContents = notify("Chapter")
+               chapters = allContents.select{|content| !content.reviewed}
+               noteCount += chapters.count
+
+               allContents = notify("Registration")
+               noteCount += allContents.count
+            end
+
+            #Counts all the Colorschemes and shout related notifications
+            allContents = notify("Colorscheme")
+            colors = allContents.select{|content| !content.activated && content.user_id == current_user.id}
+            noteCount += colors.count
+
+            allContents = notify("Shout")
+            shouts = allContents.select{|content| !content.reviewed && content.shoutbox_id == current_user.shoutbox.id}
+            noteCount += shouts.count
+
+            #Counts all the PM and partner related notifications
+            allContents = notify("PM")
+            pms = allContents.select{|content| (content.user_id == current_user.id && content.user1_unread) || (content.pmbox.user_id == current_user.id && content.user2_unread)}
+            noteCount += pms.count
+
+            allContents = notify("Partner")
+            partners = allContents.select{|content| content.inbattle && content.user_id == current_user.id}
+            noteCount += partners.count
+            value = noteCount
+         else
+            #This is for notifying staff of new content
+            contents = allContents.select{|content| !content.reviewed}
+            value = contents.count
+         end
+         return value
+      end
+
+      #Might move this to a different helper   
       def getReviewContent(type)
          value = 0
          if(type == "Creature")
@@ -440,99 +732,6 @@ module StartHelper
          return total
       end
 
-      def userAlertNotify
-         #Displays the alerts to the user if any
-         alertLimit = 6
-         holdAlert = ""
-         count = 0
-         (0..alertLimit).each do |i|
-            count = alertFound(i)
-            if(count > 0)
-               temp = alertString(i)
-               mainString = "You have "
-               if(holdAlert == "")
-                  holdAlert = mainString + count.to_s + " " + temp
-               else
-                  holdAlert += "\n"
-                  holdAlert += (mainString + count.to_s + " " + temp)
-               end
-            end
-         end
-         textString = holdAlert
-         alert = textString.gsub(/\n/, '<br/>')
-         return alert
-      end
-
-      def alertString(value)
-         #Handles the userAlert messages
-         character = ""
-         if(value == 0)
-            character = "colors that are currently in beta!"
-         elsif(value == 1)
-            character = "pms that are waiting to be read!"
-         elsif(value == 2)
-            character = "friendrequests that are awaiting review!"
-         elsif(value == 3)
-            character = "foruminvites that are awaiting review!"
-         elsif(value == 4)
-            character = "forum moderator requests to review!"
-         elsif(value == 5)
-            character = "container moderator requests to review!"
-         elsif(value == 6)
-            character = "maintopic moderator requests to review!"
-         end
-         return character
-      end
-
-      def alertFound(value)
-         #Detects user content alerts
-         amount = 0
-         userContent = []
-         if(value == 0)
-            allContent = Colorscheme.order("created_on desc")
-            userContent = allContent.select{|content| (content.user_id == current_user.id)}
-         elsif(value == 1)
-            #allContent = Pm.order("created_on desc")
-            #userContent = allContent.select{|content| ((content.to_user.id == current_user.id) && content.user2_unread) || ((content.from_user.id == current_user.id) && content.user1_unread)}
-         elsif(value == 2)
-            #allContent = Friendrequest.order("created_on desc")
-            #userContent = allContent.select{|content| (content.user_id == current_user.id)}
-         elsif(value == 3)
-            #allContent = Foruminvite.order("created_on desc")
-            #userContent = allContent.select{|content| (content.user_id == current_user.id)}
-         elsif(value == 4)
-            #allContent = Forummoderatorrequest.order("created_on desc")
-            #userContent = allContent.select{|content| (content.forum.user_id == current_user.id)}
-         elsif(value == 5)
-            #allContent = Containermoderatorrequest.order("created_on desc")
-            #userContent = allContent.select{|content| (content.topiccontainer.forum.user_id == current_user.id)}
-         elsif(value == 6)
-            #allContent = Maintopicmoderatorrequest.order("created_on desc")
-            #userContent = allContent.select{|content| (content.maintopic.topiccontainer.forum.user_id == current_user.id)}
-         end
-
-         if(value == 0)
-            awaitingReview = userContent.select{|content| !content.activated}
-            amount = awaitingReview.count
-         elsif(value == 1)
-            #amount = userContent.count
-         elsif(value > 1)
-            #awaitingReview = userContent.select{|content| content.status == "Inprocess"}
-            #amount = awaitingReview.count
-         end
-         return amount 
-      end
-
-      def checkforAlerts
-         #Determine if any alerts have happened
-         amount = 0
-         alertLimit = 6
-         (0..alertLimit).each do |i|
-            amount += alertFound(i)
-         end
-         return amount
-      end
-
       def homepageAlerts
          value = ""
          criticalMode = Maintenancemode.find_by_id(2)
@@ -657,6 +856,19 @@ module StartHelper
                   end
                end
             elsif(type == "admincontrols" || type == "keymastercontrols" || type == "reviewercontrols" || type == "managercontrols")
+               logged_in = current_user
+               if(logged_in)
+                  
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "notification" || type == "pagealerts")
+               logged_in = current_user
+               if(logged_in)
+
+               else
+                  redirect_to root_path
+               end
             end
          end
       end

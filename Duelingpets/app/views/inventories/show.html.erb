@@ -1,7 +1,7 @@
 <% provide(:h1, @inventory.user.vname + "'s Inventory") %>
 <p id="notice"><%= notice %></p>
 <div class="pageformat">
-   <p>Capacity: <%= @inventory.capacity %></p>
+   <p>Slot limit: <%= @inventory.inventoryslots.count %>/<%= @inventory.capacity %></p>
    <br>
    <% if @inventoryslots.count >= 2 %>
       <div class="formlinks"><%= paginate @inventoryslots %></div>
@@ -78,7 +78,9 @@
       <% end %>
       <br>
    <% end %>
-   <p><%= button_to "New Itempouch", new_inventory_inventoryslot_path(@inventory), method: :get, class: "button submitbutton" %></p>
+   <% if(@inventory.inventoryslot.count < @inventory.capacity) %>
+      <p><%= button_to "New Itempouch", new_inventory_inventoryslot_path(@inventory), method: :get, class: "button submitbutton" %></p>
+   <% end %>
 </div>
 <br>
 <p class="formlinks"><%= link_to "Back", user_path(@inventory.user) %></p>

@@ -61,7 +61,7 @@
    <h2 class="subheader1">Partner section</h2>
    <div class="container"><%= button_to "My Partners", user_partners_path(@user), method: :get, class: "button submitbutton" %></div>
    <br>
-   <p>Partner limit: <%= @user.partners.count %>/<%#= getUpgrades("Partner", "Limit", @user.pouch, 10) %></p>
+   <p>Partner limit: <%= @user.partners.count %>/<%= @user.inventory.petcapacity %></p>
 <% end %>
 <!--Partner section end--->
 <!--Gallery section--->
@@ -145,7 +145,7 @@
       <div class="container"><%= button_to "New OC", new_user_oc_path(@user), method: :get, class: "button submitbutton" %></div>
    <% end %>
    <br>
-   <p>OC limit: <%= @user.ocs.count %>/<%= getUpgrades("OC", "Limit", @user.pouch, 5) %></p>
+   <p>OC limit: <%= @user.ocs.count %>/<%= getUpgrades("OC", "Limit", @user.pouch, 4) %></p>
 <% else %>
    <% if current_user && current_user.id == @user.id && getUpgrades("OC", "Limit", @user.pouch, 5) > 0 %>
       <br>

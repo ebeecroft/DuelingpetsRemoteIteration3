@@ -6,8 +6,8 @@
       <p>Pouch: <%= current_user.pouch.amount %> points</p>
       <p>Emeralds: <%= current_user.pouch.emeraldamount %></p>
       <!--Notifications in different color then Pagealerts-->
-      <p>Notifications: <%#= link_to getNotifications("All"), notification_path %></p>
-      <p>Pagealerts: <%#= link_to pagealerts, notification_path %></p>
+      <p>Notifications: <%= link_to getNotifications("All"), notification_path %></p>
+      <p>Alerts: <%= link_to alert("All"), pagealerts_path %></p>
       <br>
       <p><%= button_to "Active Users", activeusers_path, method: :get, class: "button submitbutton" %></p>
       <p><%= button_to "Open Inventory", user_inventory_path(current_user, current_user.inventory), method: :get, class: "button submitbutton" %></p>
