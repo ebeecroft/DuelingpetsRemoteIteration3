@@ -14,8 +14,7 @@ A website that allows users to create their own creatures.
 * Movie: Are movies that the user decided to upload to the website. Unlike the channel, mainplaylist, and subsheet, movies must be first approved by the Duelingpets staff in order for it to show up to others on the site. Movie allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
 
 == Jukeboxes
-* Jukebox: Allows users to be able to store their various music on the website. To set one up the user needs to buy the jukebox upgrade first. After that they will need to pay in points to create a jukebox. In additon to this the user can setup some music to give the 
-jukebox a bit of flavor. Jukebox content can be restricted to various bookgroups depending on the content that it contains.
+* Jukebox: Allows users to be able to store their various music on the website. To set one up the user needs to buy the jukebox upgrade first. After that they will need to pay in points to create a jukebox. In additon to this the user can setup some music to give the jukebox a bit of flavor. Jukebox content can be restricted to various bookgroups depending on the content that it contains.
 
 * Mainsheet: Is a folder that the user uses to showcase a single song from their jukebox. In order for them to display the music, the sound itself must be reviewed first.
 
