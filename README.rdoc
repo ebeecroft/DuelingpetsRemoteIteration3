@@ -4,115 +4,39 @@ A website that allows users to create their own creatures.
 
 == Current Features:
 
-Baseincs is used to simplify the dragonhoard feature and
-does this by providing a base increment in units of tens
-that can be used with the new fieldcosts feature.
-Fieldcosts is used to flucate the economy itself by
-increasing/decreasing the costs of the sinks and sources
-of the website.
-Baserates is used to simplify the dragonhoard feature and
-does this by providing a base ratio as a double that can
-be used with the new ratecosts feature.
-Dreyores is used to keep track of the amount of dreyores
-that are available to starting users as well as those
-that the monster can pull from.
+== Channels
+* Channel: Allows users to be able to store their various videos on the website. To set one up the user needs to buy the channel upgrade first. After that they will need to pay in points to create a channel. In addition to this the user can setup some music to give the channel a bit of flavor. Channel content can be restricted to various bookgroups depending on the content that it contains.
 
-Referrals allows users to gain points whenever they get
-referred by someone.
-Bookworlds allows users to setup the story environment
-that they wish to use or to allow them to create their
-own.
-Books allows users to build on the world they had chosen
-and potentially allow other users the ability to contribute
-to the project.
-Gchapters are generic chapters that are used to keep tabs
-of the progress of a particular story.
-Chapters allows users to build out a story involving a
-variety of characters and even include a bookcover, possible
-artwork and music for the characters themselves.
+* Mainplaylist: Is a folder that the user uses to showcase a single video from their channel. In order for them to display the video, the movie itself must be reviewed first.
 
-Donationboxes allows users the ability to keep track of the
-amount of points that other users to donated to them as they
-try to reach their points goal. In addition to this they can
-refund the points back to the users if it doesn't work and
-can only use the points when they have collected them.
-Donors allows users the ability to donate to each others box
-so that points can be passed around. These points can then
-be used for commissions as well as paying for pets and items.
+* Subplaylist: Allows additional seperation of the mainplaylist content, this can be as simple as rps, movies, or crafting subplaylists. Suplaylists have a special trait in that they can be changed into either a favorite folder or movie folder depending on the click of a button. Subplaylists can be turned into collaboration centers that allow multiple people to submit movies to this one suplaylist. Subplaylists allow additional bookgroup restrictions if needed.
 
-Channels allows users to store videos as well as to set the
-type of users who can view the videos themselves.
-Mainplaylists provides a way for users to organize videos
-into folders to give structure to them.
-Subplaylists allows users to subdivide these folders
-further to provide an increased flexibility in the design.
-Also the user can allow others to submit movies to the
-subfolder.
-Movies allows users to upload different video formats to
-the website as well as setting the type of users who can
-see the video.
+* Movie: Are movies that the user decided to upload to the website. Unlike the channel, mainplaylist, and subsheet, movies must be first approved by the Duelingpets staff in order for it to show up to others on the site. Movie allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
 
-Pouchtypes is used to simplify the pouch feature by moving
-upgradable features to this table instead.
-Pouchslots adds expandability to the pouch itself without
-having to store the free and member upgrades directly to
-the pouch. This allows the pouchslots to scale at will
-as the database grows.
+== Jukeboxes
+* Jukebox: Allows users to be able to store their various music on the website. To set one up the user needs to buy the jukebox upgrade first. After that they will need to pay in points to create a jukebox. In additon to this the user can setup some music to give the 
+jukebox a bit of flavor. Jukebox content can be restricted to various bookgroups depending on the content that it contains.
 
-== Changes:
-Simplified the dragonhoard by moving some of the data to
-new tables.
+* Mainsheet: Is a folder that the user uses to showcase a single song from their jukebox. In order for them to display the music, the sound itself must be reviewed first.
 
-Simplfied the userupgrades by revising the table itself
-to be more versetal.
+* Subsheet: Allows additional seperation of the mainsheet content, this can be as simple as 8bit, 16bit, or 64bit subsheets. Subsheets have a special trait in that they can be changed into either a favorite folder or sound folder depending on the click of a button. Subsheets can be turned into collaboration centers that allow multiple people to submit sound to this one subsheet. Subsheets allow additional bookgroup restrictions if needed.
 
-Moved the pouch levels for various features to the new
-tables pouchslot and pouchtype.
+* Sound: Are sounds that the user decided to upload to the website, these could be voices or background music. Unlike the jukebox, mainsheet, and subsheet, sounds must be first approved by the Duelingpets staff in order for it to show up to others on the site. Sound allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
 
-== Iteration 1 Features:
+== Galleries
+* Gallery: Allows users to be able to store their various artwork on the website. To set one up the user needs to buy the gallery upgrade first. After that they will need to pay in points to create a gallery. In addition to this the user can setup some music to give the gallery a bit of flavor. Gallery content can be restricted to various bookgroups depending on the content that it contains.
 
-Registrations allows new users to signup to the website.
-Accountypes determines if this account is used for storing points
-or is an actual play account.
-Users allows them to edit their profile and view content.
-Colorschemes allows the user to control the color of the website.
-Pouches allows the user to store their emeralds and points inside
-a small expandable bag.
-Bookgroups determines the type of content the user can view.
-Dragonhoard the central bank that manages the pricing of features.
-Economies keeps track of the points flowing in and out of the system.
-Userinfos allows users to change their background music and their
-avatar.
+* Mainfolder: Is a folder that the user uses to showcase a single image from their gallery. In order for them to display the image, the artwork itself must be reviewed first.
 
-Blacklistednames is used to keep track of the bots that were attempting
-to get into the site.
-Blacklisteddomains is used to keep track of the domains the bots
-attempted to use to access the site.
-Suspendedtimelimits keeps track of the users who have been banned for a
-certain amount of time.
-Artpages shows the avatars for individual pages such as login, and
-registration.
+* Subfolder: Allows additional seperation of the mainfolder content, this can be as simple as dog, cats, and sheep subfolders. Subfolders have a special trait in that they can be changed into either a favorite folder, or artwork folder depending on the click of a button. Subfolders can be turned into collaboration centers that allow multiple people to submit artwork to this one subfolder. Subfolders allow additional bookgroup restrictions if needed.
 
-Userupgrades allows the user to upgrade their content.
-Gameinfos allows the player to set the mode they wish.
-Difficulty determines how difficult the game should be.
-Blogs allows the player to create news articles.
-Blogtypes determines whether it is an ad or a blog.
-Blogviewers who can view this particular blog.
+* Art: Are artworks that the user decided to upload to the website, these may at times contain music to help play out a scene. Unlike the gallery, mainfolder, and subfolder, artwork must be first approved by the Duelingpets staff in order for it to show up to others on the site. Artwork allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
 
-OCs allows players to create original characters.
-Shoutbox allows players to store shout messages.
-Shouts allows players to communicate with each other.
-Inventories allows the player to hold items.
-Items can boost a pets ability or give certain affects.
-Itemtypes determines what type of item it is.
+== Bookworlds
+* Bookworld: Allows users to be able to store their various stories on the website. Bookworlds sets up the story universe that the author has created. In addition to this the user can open up the bookworld to others and allow other users to create books of their own in this universe. The user may also choose to setup a price for books that the others might create here.
 
-Creatures allows the player to create their very own pet.
-Creaturetypes allows the player to choose between pet or Zethian.
-PMboxes stores private messages between players.
-PMs allows players to communicate privately between each other.
-PMreplies allows players to respond to a pm.
-Jukeboxes allows the player to store sounds.
-Mainsheets allows the player to seperate sounds.
-Subsheets allows the player to create more specific sound specifications.
-Sounds allows the player to create different audio tracks.
+* Book: Is a story that may contain multiple chapters that the player created for a certain universe. The user may choose to open up this book for collaboration with many other people to submit chapters. Book content can be restricted to various bookgroups depending on the content that it contains. Some example of books could be like superman, flash gordon, or pokemon. In order to create one the user needs to buy the book upgrade first. After that they will need to pay points to the bookworld owner to create a book there.
+
+* General chapters: Are generic chapters that are numbered 1 to n that are used as a template for a chapter. These get increased each time the limit of a book exceeds the amount of generic chapters that are available.
+
+* Chapter: Are chapters that the user decided to upload to the website, these may at times contain a bookcover, character voices, background music, or artwork of a character for a particular scene. Unlike the bookworld, book, and gchapters, chapter must be first approved by the Duelingpets staff in order for it to show up to others on the site. Chapters allows the user to generate points and is dependent on the price of the day.
