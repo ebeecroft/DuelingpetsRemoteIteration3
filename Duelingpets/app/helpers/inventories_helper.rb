@@ -39,7 +39,6 @@ module InventoriesHelper
                      @inventory = inventoryFound
                      slots = @inventory.inventoryslots.all
                      @inventoryslots = Kaminari.paginate_array(slots).page(getInventoryParams("Page")).per(1)
-                     #raise "I work here"
                   end
                else
                   redirect_to root_path
