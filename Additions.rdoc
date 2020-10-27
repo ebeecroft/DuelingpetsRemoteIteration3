@@ -2,6 +2,42 @@
 == Iteration 3
 
 == Iteration 2
+== Channels
+* Channel: Allows users to be able to store their various videos on the website. To set one up the user needs to buy the channel upgrade first. After that they will need to pay in points to create a channel. In addition to this the user can setup some music to give the channel a bit of flavor. Channel content can be restricted to various bookgroups depending on the content that it contains.
+
+* Mainplaylist: Is a folder that the user uses to showcase a single video from their channel. In order for them to display the video, the movie itself must be reviewed first.
+
+* Subplaylist: Allows additional seperation of the mainplaylist content, this can be as simple as rps, movies, or crafting subplaylists. Suplaylists have a special trait in that they can be changed into either a favorite folder or movie folder depending on the click of a button. Subplaylists can be turned into collaboration centers that allow multiple people to submit movies to this one suplaylist. Subplaylists allow additional bookgroup restrictions if needed.
+
+* Movie: Are movies that the user decided to upload to the website. Unlike the channel, mainplaylist, and subsheet, movies must be first approved by the Duelingpets staff in order for it to show up to others on the site. Movie allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
+
+== Bookworlds
+* Bookworld: Allows users to be able to store their various stories on the website. Bookworlds sets up the story universe that the author has created. In addition to this the user can open up the bookworld to others and allow other users to create books of their own in this universe. The user may also choose to setup a price for books that the others might create here.
+
+* Book: Is a story that may contain multiple chapters that the player created for a certain universe. The user may choose to open up this book for collaboration with many other people to submit chapters. Book content can be restricted to various bookgroups depending on the content that it contains. Some example of books could be like superman, flash gordon, or pokemon. In order to create one the user needs to buy the book upgrade first. After that they will need to pay points to the bookworld owner to create a book there.
+
+* General chapters: Are generic chapters that are numbered 1 to n that are used as a template for a chapter. These get increased each time the limit of a book exceeds the amount of generic chapters that are available.
+
+* Chapter: Are chapters that the user decided to upload to the website, these may at times contain a bookcover, character voices, background music, or artwork of a character for a particular scene. Unlike the bookworld, book, and gchapters, chapter must be first approved by the Duelingpets staff in order for it to show up to others on the site. Chapters allows the user to generate points and is dependent on the price of the day.
+
+== Communications
+* Donationbox: Allows the user to store donations from other users, these can be from point commissions or from users who enjoy other peoples artwork. Donationboxes have a goal and progress limit for keeping track of points. The goal is an amount of points that the user needs to reach before they can safely withdraw the points from their donationbox. The progress bar keeps track of how many points have been received by the system in relation to the goal. There is a maximum capacity of 2 Million points that can be safely stored here. While you could set your goal to this number, it is not recommended as that might take a long while to reach. There are safety valves built into the system to ensure that points are not forever stuck in a donationbox. The user may choose to refund all the points that are currently stored in the donationbox and start over or the admin of the site can do so as well. When the user retrieves the points from their donationbox they are charged a small fee to pull the points out, which is based off the points that have been accumulated. The donationbox can be turned on or off depending on whether the user wishes to use this feature or not.
+
+* Donor: Are players who contribute a set amount of points to an user's donationbox. There is a maximum cap of 50000 points to ensure that one user doesn't monopolize the entire point limit that is set on the donationbox. The pointsreceived attribute is set once the points are safely pulled out of the donationbox, this is to ensure that the donations have been accounted for.
+
+* Referral: Allows players to refer other the users to the site by means of giving out their vname on a link. When the new user signs up for the site the player who referred them will receive points for doing so based on the points set up by the dragonhoard.
+
+== User information
+* Pouchtypes is used to identify the various types of items that can be upgraded. Pouchslots expands the pouch to accomodate fields such as galleries, blogs, channels, and others. Each slot is setup with free and member levels that determines how much of that particular item one can carry. Any fields that are available for future expansion are set to none. Pouchslots allows the pouch to expand infinitely without having to recode the pouch each time a new feature gets added. Pouchslots currently can support up to 42 attributes which might be changed over time.
+
+== Central Bank
+* Base Increment: Determines how much to increase or decrease a particular feature by. Valid increments are Tiny, Small, Medium, Large, XL and 2XL. Tiny is set to a value of 1, Small is set to a value of 10, Medium is set to a value of 100 and each additional one adds another 0 to the end.
+
+* Base Rate: Determines the rate at which to increase or decrease a particular feature through floats or doubles. Valid rates are Tiny, Small, Medium, Large, XL and 2XL. Tiny is set to a value of 0.1, Small is set to a value of 0.01, Medium is set to a value of 0.001 and each additional one adds another 0 in front of the number 1.
+
+* Fieldcost: Sets up the pricing for various user attributes. Econtype specifies whether this attribute is a source, since or tax on points. Baseinc determines how much to increase the value by. Amount is the current value in points of the attribute that we are looking at. Ratecost sets up the ratio for various user attributes. Econtype specifies whether this attribute is a source, sink or tax. Baserate determines how much to increase the value by. Amount is the current rate for a particular attribute.
+
+* Dreyores: Is a special material that the user is initially given upon signing up for an account. Dreyore can be either refined for points or the player can use it to build creatures and items. The ore itself can not be traded and maybe in the future might be given out for beating monsters. Each dreyore is worth a price of 20 points as its starting value and increases by 1 depending on how many total ores have been extracted. Change specifies the amount ores that need to be refined before bumping up the price, by default this is set to 7. Capacity determines the maximum dreyore cap the dragonhoard can hold up to. Once the dreyore is running low Glitchy can create more ores at the cost of setting the price back to 20. Current keeps track of how many dreyores are left at the dragonhoard. Baseinc increases the amount of ores that are stockpiled. Extracted keeps track of the total ores refined up to the change value before reseting back to 0. There are two dreyores available, Newbie and Monster each with its own cap, but only Newbie ore is active. Each player can store up to 10 dreyores initially.
 
 == Iteration 1
 == Jukeboxes
