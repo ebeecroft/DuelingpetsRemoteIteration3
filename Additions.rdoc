@@ -1,5 +1,23 @@
 == Additions
 == Iteration 3
+== Galleries
+* Gallery: Allows users to be able to store their various artwork on the website. To set one up the user needs to buy the gallery upgrade first. After that they will need to pay in points to create a gallery. In addition to this the user can setup some music to give the gallery a bit of flavor. Gallery content can be restricted to various bookgroups depending on the content that it contains.
+
+* Mainfolder: Is a folder that the user uses to showcase a single image from their gallery. In order for them to display the image, the artwork itself must be reviewed first.
+
+* Subfolder: Allows additional seperation of the mainfolder content, this can be as simple as dog, cats, and sheep subfolders. Subfolders have a special trait in that they can be changed into either a favorite folder, or artwork folder depending on the click of a button. Subfolders can be turned into collaboration centers that allow multiple people to submit artwork to this one subfolder. Subfolders allow additional bookgroup restrictions if needed.
+
+* Art: Are artworks that the user decided to upload to the website, these may at times contain music to help play out a scene. Unlike the gallery, mainfolder, and subfolder, artwork must be first approved by the Duelingpets staff in order for it to show up to others on the site. Artwork allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
+
+== User Content
+* Partner: Are creatures that the user adopted be they Zethians or Pets. Partners don't like engaging in battle as it is not a lot of fun for them. They don't like fighting all that much so their fun values decrease depending on the monster's level. A pet's strength determines the item the pet can equip and with each item it decreases the pet's strength to boost other stats. Pets that are in battle can't be healed or fed and have a limited set of lives based on the creature lives. Also when a pet wins battles they can level up and increase their stats. Activepet determines which pet is currently following the player.
+
+== User information
+* Inventoryslots stores the items that the user purchased and is limited to a total of 14 per slot. Starting durability displays the amount of uses the item initially starts off with and current durability displays the amount of uses left for that particular item. Quantity shows the amount of items left in a particular itemslot and once the last item is used up the itemslot gets set to nil.
+
+* Equip: Stores the items that are currently equipped to the partner. Capacity determines how many equipslots the partner can carry, currently this is set to three. Equipslots show the items that are equipped to the partner and supports up to 8 items. Unlike inventoryslot there is no quantity attributes. Starting durability displays the amount of uses the item initially starts off with and current durability displays the amount of uses left for that particular item. In order for an item to be equipped the amount of strength that the item requires must be less than or equal to the pet's current strength.
+
+* Itemaction: Determines what the user wants to do with the item that they are applying to the pet. Possible choices are Discard, Equip, Feed, Drink, and Play. Additional actions might be added later. Discard sends the item to the junk dealer to look over and he will offer the player some points in exchange for the item itself. The Equip option is only offered on items that can be attached to the pet itself. The Feed option only works for items like bread that the pet can eat to restore their hunger. The Drink option only works for items like milk that the pet can drink to restore their thirst. The Play option is meant for toys like yoyos that they can use to increase their fun value.
 
 == Iteration 2
 == Channels
